@@ -1,0 +1,42 @@
+plugins { 
+    // The properties plugin must be applied BEFORE ml-gradle so that ml-gradle sees the results of the properties plugin
+    // processing the gradle-(environmentName).properties files.
+    id "net.saliman.properties" version "1.4.6"
+
+    id "com.marklogic.ml-gradle" version "2.8.0"
+}
+
+ext {
+    // mlAppConfig is an instance of com.marklogic.appdeployer.AppConfig
+    mlAppConfig {
+        // Example of adding custom tokens; these will then be replaced in any JSON/XML config files
+//        customTokens.put("sample-key", "sample-value")
+//        customTokens.put("%%ODBC_PORT%%", "8102")
+//        customTokens.put("%%XDBC_PORT%%", "8103")
+
+        // By default, the createTriggersDatabase attribute is set to true, which results in a triggers database being
+        // created, even if a databases/triggers-database.json file isn't present. Un-commenting the line will below
+        // will prevent one from being created (assuming the triggers-database.json file isn't present).
+        createTriggersDatabase = false
+
+        // Example of adding a path for modules to the list of module paths, which defaults to src/main/ml-modules
+        // modulePaths.add("src/another-modules-dir")
+        // You can also override the list of module paths
+        // modulePaths = ["src/another-modules-dir"]
+
+        // You can have multiple config files for your content database. This is useful when you have a dependency on
+        // a package of MarkLogic modules that requires some content database config, and you don't want to duplicate
+        // that in your own content-database.json file. Instead, just add the file from your
+        // build/mlRestApi/(name of dependency)/ml-config/databases directory.
+        configDir.contentDatabaseFiles.add(new File("src/main/ml-config/databases/more-content-database-config.json"))
+
+        // XCC URL for running corb task below and for creating triggers on pre-8.0-4 builds of MarkLogic
+//        contentXccUrl = "xcc://${mlRestAdminUsername}:${mlRestAdminPassword}@${mlHost}:${mlRestPort}"
+    }
+}
+
+task printHost {
+    doLast {
+        println "mlHost: ${mlHost}"
+    }
+}
