@@ -1,0 +1,316 @@
+<export><workspace name="TDE"><query name="Insert Example Document" focus="false" listorder="1" taborder="1" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="javascript">'use strict';
+
+declareUpdate();
+xdmp.documentInsert(
+  "/soccer/match/1234567.json",
+  { 
+    "match": {
+      "id": 1234567,
+      "docUri": "/soccer/match/1234567.json",
+      "match-date": "2016-01-12",
+      "league": "Premier",
+      "teams": {
+        "home": "Bournemouth",
+        "away": "West Ham United" 
+      } ,
+      "score": {
+        "home": 1,
+        "away": 3 
+      },
+      "abstract": "Dimitri Payet inspired a West Ham comeback to secure victory over Bournemouth." ,
+      "report": "Harry Arter had given the hosts the lead with a 25-yard strike. ... "
+    }
+  },
+  xdmp.defaultPermissions(),
+  ["TDE", "source1"]
+)</query><query name="Validate Template" focus="false" listorder="2" taborder="2" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="javascript">'use strict';
+
+var myFirstTDE = xdmp.toJSON(
+  {
+    "template": {
+      "context": "/match",
+      "collections": ["source1"],
+      "rows": [
+        {
+          "schemaName": "soccer",
+          "viewName": "matches",
+          "columns": [
+            {
+              "name": "id",
+              "scalarType": "long",
+              "val": "id"
+            },
+            {
+              "name": "document",
+              "scalarType": "string",
+              "val": "docUri"
+            },
+            {
+              "name": "date",
+              "scalarType": "date",
+              "val": "match-date"
+            },
+            {
+              "name": "league",
+              "scalarType": "string",
+              "val": "league"
+            }
+          ]
+        }
+      ]
+    }
+  }
+);
+
+tde.validate( 
+  [myFirstTDE]
+);</query><query name="Test Template" focus="false" listorder="3" taborder="3" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="javascript">'use strict';
+
+var myFirstTDE = xdmp.toJSON(
+  {
+    "template": {
+      "context": "/match",
+      "collections": ["source1"],
+      "rows": [
+        {
+          "schemaName": "soccer",
+          "viewName": "matches",
+          "columns": [
+            {
+              "name": "id",
+              "scalarType": "long",
+              "val": "id"
+            },
+            {
+              "name": "document",
+              "scalarType": "string",
+              "val": "docUri"
+            },
+            {
+              "name": "date",
+              "scalarType": "date",
+              "val": "match-date"
+            },
+            {
+              "name": "league",
+              "scalarType": "string",
+              "val": "league" 
+            }
+          ]
+        }
+      ]
+    }
+  }
+);
+
+tde.nodeDataExtract( 
+  [cts.doc( "/soccer/match/1234567.json" )],
+  [myFirstTDE]
+);</query><query name="Insert Template" focus="false" listorder="4" taborder="4" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="javascript">'use strict';
+
+var tde = require("/MarkLogic/tde.xqy");
+
+var myFirstTDE = xdmp.toJSON(
+  {
+    "template": {
+      "context": "/match",
+      "collections": ["source1"],
+      "rows": [
+        {
+          "schemaName": "soccer",
+          "viewName": "matches",
+          "columns": [
+            {
+              "name": "id",
+              "scalarType": "long",
+              "val": "id"
+            },
+            {
+              "name": "document",
+              "scalarType": "string",
+              "val": "docUri"
+            },
+            {
+              "name": "date",
+              "scalarType": "date",
+              "val": "match-date"
+            },
+            {
+              "name": "league",
+              "scalarType": "string",
+              "val": "league" 
+            }
+          ]
+        }
+      ]
+    }
+  }
+);
+
+tde.templateInsert(
+  "/test/myFirstTDE.json" ,
+  myFirstTDE,
+  xdmp.defaultPermissions(),
+  ["TDE"]
+)</query><query name="Use Template" focus="false" listorder="5" taborder="5" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="javascript">'use strict';
+
+tde.nodeDataExtract( 
+  [cts.doc( "/soccer/match/1234567.json" )]
+)</query><query name="View Template" focus="false" listorder="6" taborder="6" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="javascript">'use strict';
+
+tde.getView ( "soccer", "matches" )</query><query name="Sql View" focus="false" listorder="7" taborder="7" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="sql">-- query
+
+select * from matches</query><query name="Insert Example (xqy)" focus="false" listorder="8" taborder="8" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+
+xdmp:document-insert(
+  "/soccer/match/1234567.xml",
+  &lt;match&gt;
+    &lt;id&gt;1234567&lt;/id&gt;
+    &lt;docUri&gt;/soccer/match/1234567.xml&lt;/docUri&gt;
+    &lt;match-date&gt;2016-01-12&lt;/match-date&gt;
+    &lt;league&gt;Premier&lt;/league&gt;
+    &lt;teams&gt;
+      &lt;home&gt;Bournemouth&lt;/home&gt;
+      &lt;away&gt;West Ham United&lt;/away&gt;
+    &lt;/teams&gt;
+    &lt;score&gt;
+      &lt;home&gt;1&lt;/home&gt;
+      &lt;away&gt;3&lt;/away&gt;
+    &lt;/score&gt;
+    &lt;abstract&gt;Dimitri Payet inspired a West Ham comeback to secure victory over Bournemouth.&lt;/abstract&gt;
+    &lt;report&gt;Harry Arter had given the hosts the lead with a 25-yard strike. ... &lt;/report&gt;
+  &lt;/match&gt;,
+  (),
+  ("TDE", "source1")
+)</query><query name="Validate Template (xqy)" focus="false" listorder="9" taborder="9" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+
+let $my-first-TDE:=
+  &lt;template xmlns="http://marklogic.com/xdmp/tde"&gt;
+    &lt;context&gt;/match&lt;/context&gt;
+    &lt;collections&gt;
+      &lt;collection&gt;source1&lt;/collection&gt;
+    &lt;/collections&gt;
+    &lt;rows&gt;
+      &lt;row&gt;
+        &lt;schema-name&gt;soccer&lt;/schema-name&gt;
+        &lt;view-name&gt;matches&lt;/view-name&gt;
+        &lt;columns&gt;
+          &lt;column&gt;
+            &lt;name&gt;id&lt;/name&gt;
+            &lt;scalar-type&gt;long&lt;/scalar-type&gt;
+            &lt;val&gt;id&lt;/val&gt;
+          &lt;/column&gt;
+          &lt;column&gt;
+            &lt;name&gt;document&lt;/name&gt;
+            &lt;scalar-type&gt;string&lt;/scalar-type&gt;
+            &lt;val&gt;docUri&lt;/val&gt;
+          &lt;/column&gt;
+          &lt;column&gt;
+            &lt;name&gt;date&lt;/name&gt;
+            &lt;scalar-type&gt;date&lt;/scalar-type&gt;
+            &lt;val&gt;match-date&lt;/val&gt;
+          &lt;/column&gt;
+          &lt;column&gt;
+            &lt;name&gt;league&lt;/name&gt;
+            &lt;scalar-type&gt;string&lt;/scalar-type&gt;
+            &lt;val&gt;league&lt;/val&gt;
+          &lt;/column&gt;
+        &lt;/columns&gt;
+      &lt;/row&gt;
+    &lt;/rows&gt;
+  &lt;/template&gt;
+return
+  tde:validate( 
+    $my-first-TDE 
+  )</query><query name="Test Template (xqy)" focus="false" listorder="10" taborder="10" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+
+let $my-first-TDE:=
+  &lt;template xmlns="http://marklogic.com/xdmp/tde"&gt;
+    &lt;context&gt;/match&lt;/context&gt;
+    &lt;collections&gt;
+      &lt;collection&gt;source1&lt;/collection&gt;
+    &lt;/collections&gt;
+    &lt;rows&gt;
+      &lt;row&gt;
+        &lt;schema-name&gt;soccer&lt;/schema-name&gt;
+        &lt;view-name&gt;matches&lt;/view-name&gt;
+        &lt;columns&gt;
+          &lt;column&gt;
+            &lt;name&gt;id&lt;/name&gt;
+            &lt;scalar-type&gt;long&lt;/scalar-type&gt;
+            &lt;val&gt;id&lt;/val&gt;
+          &lt;/column&gt;
+          &lt;column&gt;
+            &lt;name&gt;document&lt;/name&gt;
+            &lt;scalar-type&gt;string&lt;/scalar-type&gt;
+            &lt;val&gt;docUri&lt;/val&gt;
+          &lt;/column&gt;
+          &lt;column&gt;
+            &lt;name&gt;date&lt;/name&gt;
+            &lt;scalar-type&gt;date&lt;/scalar-type&gt;
+            &lt;val&gt;match-date&lt;/val&gt;
+          &lt;/column&gt;
+          &lt;column&gt;
+            &lt;name&gt;league&lt;/name&gt;
+            &lt;scalar-type&gt;string&lt;/scalar-type&gt;
+            &lt;val&gt;league&lt;/val&gt;
+          &lt;/column&gt;
+        &lt;/columns&gt;
+      &lt;/row&gt;
+    &lt;/rows&gt;
+  &lt;/template&gt;
+return
+  tde:node-data-extract( 
+    fn:doc( "/soccer/match/1234567.xml" ), 
+    $my-first-TDE 
+  )</query><query name="Insert Template (xqy)" focus="false" listorder="11" taborder="11" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+
+import module namespace tde = "http://marklogic.com/xdmp/tde" at "/MarkLogic/tde.xqy";
+
+let $my-first-TDE:=
+  &lt;template xmlns="http://marklogic.com/xdmp/tde"&gt;
+    &lt;context&gt;/match&lt;/context&gt;
+    &lt;collections&gt;
+      &lt;collection&gt;source1&lt;/collection&gt;
+    &lt;/collections&gt;
+    &lt;rows&gt;
+      &lt;row&gt;
+        &lt;schema-name&gt;soccer&lt;/schema-name&gt;
+        &lt;view-name&gt;matches&lt;/view-name&gt;
+        &lt;columns&gt;
+          &lt;column&gt;
+            &lt;name&gt;id&lt;/name&gt;
+            &lt;scalar-type&gt;long&lt;/scalar-type&gt;
+            &lt;val&gt;id&lt;/val&gt;
+          &lt;/column&gt;
+          &lt;column&gt;
+            &lt;name&gt;document&lt;/name&gt;
+            &lt;scalar-type&gt;string&lt;/scalar-type&gt;
+            &lt;val&gt;docUri&lt;/val&gt;
+          &lt;/column&gt;
+          &lt;column&gt;
+            &lt;name&gt;date&lt;/name&gt;
+            &lt;scalar-type&gt;date&lt;/scalar-type&gt;
+            &lt;val&gt;match-date&lt;/val&gt;
+          &lt;/column&gt;
+          &lt;column&gt;
+            &lt;name&gt;league&lt;/name&gt;
+            &lt;scalar-type&gt;string&lt;/scalar-type&gt;
+            &lt;val&gt;league&lt;/val&gt;
+          &lt;/column&gt;
+        &lt;/columns&gt;
+      &lt;/row&gt;
+    &lt;/rows&gt;
+  &lt;/template&gt;
+return
+  tde:template-insert(
+    "/test/my-first-TDE.xml" ,
+    $my-first-TDE ,
+    xdmp:default-permissions()
+  )</query><query name="Use Template (xqy)" focus="false" listorder="12" taborder="12" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+
+tde:node-data-extract( 
+  fn:doc("/soccer/match/1234567.xml")
+)</query><query name="View Template (xqy)" focus="false" listorder="13" taborder="13" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="xquery">xquery version "1.0-ml";
+
+tde:get-view ( "soccer", "matches" )</query><query name="Sql via XQuery" focus="true" listorder="14" taborder="14" active="true" database="10069041394905970544" server="14591325997099872701" database-name="Documents" server-name="App-Services" mode="xquery">xdmp:sql('select * from matches')</query></workspace></export>
