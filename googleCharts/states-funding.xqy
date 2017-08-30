@@ -26,26 +26,7 @@ let $json-state-dod-funding := '{"OH":333879909, "CA":468538417, "AL":196231667,
 
 let $_ := xdmp:log($json-state-dod-funding)
 
-let $load-script := "google.charts.load('current', {'packages':['intensitymap']});"
-let $on-load-callback-script :=
-"
-            google.charts.setOnLoadCallback(drawChart);
-
-            function drawChart() {
-              var data = google.visualization.arrayToDataTable([
-                ['Country', 'Population (mil)', 'Area (km2)'],
-                ['CN',            1324,           9640821],
-                ['IN',            1133,           3287263],
-                ['US',            304,            9629091],
-                ['ID',            232,            1904569],
-                ['BR',            187,            8514877]
-              ]);
-
-              var chart = new google.visualization.IntensityMap(document.getElementById('chart_div'));
-
-              chart.draw(data, {});
-            }
-"
+let $load-script := ""
 
 let $_ := xdmp:set-response-content-type("text/html")
 return (
@@ -53,10 +34,9 @@ return (
 <html lang="en">
 <head>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">A</script>
-<script type="text/javascript">{$load-script}</script>
 </head>
 <body>
-    <script type="text/javascript">{$on-load-callback-script}</script>
+    <script type="text/javascript" src="/googleCharts/googleCharts.js">A</script>
     <div id="chart_div"></div>
 </body>
 </html>
