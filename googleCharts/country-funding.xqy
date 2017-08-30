@@ -36,7 +36,7 @@ return (
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">A</script>
 </head>
 <body>
-    <script type="text/javascript" src="/googleCharts/state-funding.js">A</script>
+    <script type="text/javascript" src="/googleCharts/country-funding.js">A</script>
     <div id="chart_div"></div>
 </body>
 </html>
