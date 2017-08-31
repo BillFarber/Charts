@@ -1,16 +1,13 @@
 google.charts.load('current', {'packages':['intensitymap']});
-google.charts.setOnLoadCallback(drawChart);
 
-function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-    ['State', 'Foo Factor'],
-    ['US-IL', 200],
-    ['US-IN', 300],
-    ['US-IA', 20],
-    ['US-RI', 150]
-]);
+function setCallback(fundingData) {
+    google.charts.setOnLoadCallback(function() {
+        drawChart(fundingData);
+    });
+}
 
+function drawChart(fundingData) {
+    var data = google.visualization.arrayToDataTable(fundingData);
     var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
-
     chart.draw(data, {region: "US", resolution: "provinces"});
 }
