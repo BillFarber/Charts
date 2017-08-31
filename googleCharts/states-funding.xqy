@@ -33,7 +33,7 @@ return (
     "<!DOCTYPE html>",
     <html lang="en">
         <head>
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">A</script>
+            <script type="text/javascript" src="/googleCharts/lib/google/loader.js">A</script>
         </head>
         <body>
             <script type="text/javascript" src="/googleCharts/state-funding.js">A</script>
