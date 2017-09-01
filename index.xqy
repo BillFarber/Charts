@@ -6,7 +6,7 @@ return (
             <h1>Hard-coded Samples</h1>
             <ul>
                 <li><a href="plainD3/states-funding.xqy">Plain D3 Choropleth</a></li>
-                <li><a href="highchartsSampleChoropleth.xqy">Highcharts Choropleth</a></li>
+                <li><a href="highcharts/highchartsSampleChoropleth.xqy">Highcharts Choropleth</a></li>
                 <li><a href="googleCharts/states-funding.xqy">Google Charts States Choropleth</a></li>
                 <li><a href="googleCharts/country-funding.xqy">Google Charts Country Choropleth</a></li>
                 <br>&nbsp;</br>
