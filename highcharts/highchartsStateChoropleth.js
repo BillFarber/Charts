@@ -13,7 +13,7 @@ function drawChart(data) {
     },
 
     title: {
-      text: 'US population density (/km²)'
+      text: 'Funding in Dollars'
     },
 
     legend: {
@@ -30,8 +30,8 @@ function drawChart(data) {
     },
 
     colorAxis: {
-      min: 1,
-      type: 'logarithmic',
+      min: 50000000,
+      type: 'linear',
       minColor: '#EEEEFF',
       maxColor: '#000022',
       stops: [
@@ -53,7 +53,7 @@ function drawChart(data) {
         color: '#FFFFFF',
         format: '{point.code}'
       },
-      name: 'Population density',
+      name: 'Research Funding',
       tooltip: {
         pointFormat: '{point.code}: {point.value}/km²'
       }
