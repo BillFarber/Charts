@@ -1,3 +1,21 @@
 {
-    "database-name":"Charts"
+    "database-name":"Charts",
+    "range-element-index": [
+        {
+            "invalid-values": "reject",
+            "collation": "",
+            "localname": "TotalDODFunding",
+            "namespace-uri": "http://dtic.mil/mdr/record/meta",
+            "range-value-positions": false,
+            "scalar-type": "long"
+        },
+        {
+            "invalid-values": "reject",
+            "collation": "http://marklogic.com/collation/",
+            "localname": "State",
+            "namespace-uri": "http://dtic.mil/mdr/record/meta",
+            "range-value-positions": false,
+            "scalar-type": "string"
+        }
+    ]
 }
