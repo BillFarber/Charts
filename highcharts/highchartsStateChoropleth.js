@@ -1,5 +1,5 @@
-function drawChart(data) {
-
+$(function() {
+  data = stateData;
   // Make codes uppercase to match the map data
   $.each(data, function() {
     this.code = this.code.toUpperCase();
@@ -55,8 +55,13 @@ function drawChart(data) {
       },
       name: 'Research Funding',
       tooltip: {
-        pointFormat: '{point.code}: {point.value}/km²'
+          numberFormat: '{point.code}: ${point.value}'
+      },
+      point: {
+          events: {
+              click: function(e) { statePopup(this.code); }
+          }
       }
     }]
   });
-};
+})
