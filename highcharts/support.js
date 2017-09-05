@@ -27,8 +27,16 @@ statePopup = function(stateCode) {
                 color: '#C40401',
                 y: funding[stateCode].Acme
             }, {
-                name: 'DefenseIndustrialComplex',
+                name: 'Boeing',
                 color: '#C40401',
+                y: funding[stateCode].Boeing
+            }, {
+                name: 'Carnitas',
+                color: '#02C401',
+                y: funding[stateCode].Carnitas
+            }, {
+                name: 'DefenseIndustrialComplex',
+                color: '#0204C1',
                 y: funding[stateCode].DefenseIndustrialComplex
             }],
             dataLabels: {
