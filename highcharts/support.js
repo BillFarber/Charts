@@ -1,17 +1,28 @@
 var colors = ['#0200D0', '#C40401', '#02C401', '#0204C1'];
+var maxOrganizations = 3;
+
 seriesData = function(stateCode) {
-    var keys = [];
     var data = [];
+    var stateFunding = funding[stateCode];
+    var sortableStateFunding = [];
+    for (var organization in stateFunding) {
+        sortableStateFunding.push([organization, stateFunding[organization]]);
+    }
+    sortableStateFunding.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+
     var colorCt = 0;
-    for (var key in funding[stateCode]) {
-        if (key != "TOTAL") {
-            colorCt++;
+    for (var key in sortableStateFunding) {
+        var orgFunding = sortableStateFunding[key];
+        if ((orgFunding[0] != "TOTAL") && (colorCt < maxOrganizations)) {
             series = {
-                name: key,
-//                color: colors[colorCt],
-                y: funding[stateCode][key]
+                name: orgFunding[0],
+                color: colors[colorCt],
+                y: orgFunding[1]
             }
             data.push(series);
+            colorCt++;
         };
     };
     return data;
