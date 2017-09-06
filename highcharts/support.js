@@ -38,6 +38,10 @@ statePopup = function(stateCode) {
         series: [{
             name: 'Votes',
             data: seriesData(stateCode),
+            tooltip : {
+                followPointer : false,
+                valuePrefix: '$'
+            },
             dataLabels: {
                 format: '<b>{point.name}</b> {point.percentage:.1f}%'
             }
