@@ -1,3 +1,22 @@
+var colors = ['#0200D0', '#C40401', '#02C401', '#0204C1'];
+seriesData = function(stateCode) {
+    var keys = [];
+    var data = [];
+    var colorCt = 0;
+    for (var key in funding[stateCode]) {
+        if (key != "TOTAL") {
+            colorCt++;
+            series = {
+                name: key,
+//                color: colors[colorCt],
+                y: funding[stateCode][key]
+            }
+            data.push(series);
+        };
+    };
+    return data;
+};
+
 statePopup = function(stateCode) {
     var $div = $('<div></div>')
         .dialog({
@@ -18,27 +37,7 @@ statePopup = function(stateCode) {
         },
         series: [{
             name: 'Votes',
-            data: [{
-                name: 'IAC',
-                color: '#0200D0',
-                y: funding[stateCode].IAC
-            }, {
-                name: 'Acme',
-                color: '#C40401',
-                y: funding[stateCode].Acme
-            }, {
-                name: 'Boeing',
-                color: '#C40401',
-                y: funding[stateCode].Boeing
-            }, {
-                name: 'Carnitas',
-                color: '#02C401',
-                y: funding[stateCode].Carnitas
-            }, {
-                name: 'DefenseIndustrialComplex',
-                color: '#0204C1',
-                y: funding[stateCode].DefenseIndustrialComplex
-            }],
+            data: seriesData(stateCode),
             dataLabels: {
                 format: '<b>{point.name}</b> {point.percentage:.1f}%'
             }
