@@ -1,0 +1,1637 @@
+            "path-namespace": [
+                {
+                    "prefix": "mdr",
+                    "namespace-uri": "http://dtic.mil/mdr/record"
+                },
+                {
+                    "prefix": "meta",
+                    "namespace-uri": "http://dtic.mil/mdr/record/meta"
+                },
+                {
+                    "prefix": "proc",
+                    "namespace-uri": "http://www.dtic.mil/comptroller/xml/schema/20100219/procurement"
+                },
+                {
+                    "prefix": "r2",
+                    "namespace-uri": "http://www.dtic.mil/comptroller/xml/schema/022009/r2"
+                },
+                {
+                    "prefix": "agreement",
+                    "namespace-uri": "http://dtic.mil/iadb/agreement"
+                }
+            ],
+            "field": [
+                {
+                    "field-name": "ac",
+                    "field-path": [
+                        {
+                            "path": "/mdr:Record/meta:Metadata/meta:AbstractClassification/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "aft",
+                    "field-path": [
+                        {
+                            "path": "//meta:AirForceTechnicalCapability/meta:Description",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "appn",
+                    "field-path": [
+                        {
+                            "path": "//proc:AppropriationNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:AppropriationCode",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "apt",
+                    "field-path": [
+                        {
+                            "path": "//proc:AppropriationTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:AppropriationName",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ato",
+                    "field-path": [
+                        {
+                            "path": "//meta:ArmyTechnicalCapability/meta:Description",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "au",
+                    "field-path": [
+                        {
+                            "path": "//meta:PersonalAuthor",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingIndividual/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ResponsibleIndividual/meta:Name",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ba",
+                    "field-path": [
+                        {
+                            "path": "/mdr:Record/proc:LineItemList/proc:LineItem/proc:BudgetActivityNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:DODFundingSource/meta:BudgetActivityCode/meta:Code",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "/mdr:Record/r2:LineItemList/r2:LineItem/r2:BudgetActivityNumber",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "bat",
+                    "field-path": [
+                        {
+                            "path": "//proc:BudgetActivityTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:BudgetActivityTitle",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "bc",
+                    "field-path": [
+                        {
+                            "path": "//proc:BudgetCycle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:BudgetCycle",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "by",
+                    "field-path": [
+                        {
+                            "path": "/mdr:Record/proc:LineItemList/proc:LineItem/proc:BudgetYear",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "/mdr:Record/r2:R2ExhibitList/r2:R2Exhibit/r2:ProgramElement/r2:BudgetYear",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ca",
+                    "field-path": [
+                        {
+                            "path": "//meta:CorporateAuthor",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Publisher",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//mdr:canav",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:OrganizationSourceComponent/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:OrganizationSourceComponent/meta:Acronym",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ResponsibleOrganization/meta:OrganizationSourceActivity/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:CageCodeOrganization/meta:CompanyName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:CompanyName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ServiceAgencyAcronym",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:ServiceAgencyName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:ServiceAgencyName",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "cas",
+                    "field-path": [
+                        {
+                            "path": "//meta:CorporateAuthor",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ResponsibleOrganization[1]/meta:OrganizationSourceActivity/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:ServiceAgencyName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:ServiceAgencyName",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ci",
+                    "field-path": [
+                        {
+                            "path": "//meta:CitationClassification/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "cti",
+                    "field-path": [
+                        {
+                            "path": "//meta:ClassifiedTitle",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "coi",
+                    "field-path": [
+                        {
+                            "path": "//meta:CommunityOfInterest/meta:MainName",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "cois",
+                    "field-path": [
+                        {
+                            "path": "//meta:CommunityOfInterest/meta:SubAreaName",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "crd",
+                    "field-path": [
+                        {
+                            "path": "//meta:CitationCreationDate/meta:Date",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ct",
+                    "field-path": [
+                        {
+                            "path": "//meta:ContractNumbers",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ContractNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:LocalControlNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:TransferNumber",
+                            "weight": 1.0
+                        }                    ]
+                },
+                {
+                    "field-name": "dc",
+                    "field-path": [
+                        {
+                            "path": "//meta:Metadata/meta:Distributions/meta:Distribution1/meta:Code",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Metadata/meta:Distributions/meta:Distribution2/meta:Code",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Metadata/meta:Distributions/meta:Distribution3/meta:Code",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Metadata/meta:DistributionCode/meta:Description",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Metadata/meta:DistributionCode/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "dcs",
+                    "field-path": [
+                        {
+                            "path": "//meta:DescriptorClassification/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "dnt",
+                    "field-path": [
+                        {
+                            "path": "//meta:DescriptiveNote",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Category",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "dr",
+                    "field-path": [
+                        {
+                            "path": "//meta:DistributionStatement",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:DistributionReason",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "dta",
+                    "field-path": [
+                        {
+                            "path": "//meta:DefenseTechnologyArea/meta:MainName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:DefenseTechnologyArea/meta:DefenseTechnologyAreaOther",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "dts",
+                    "field-path": [
+                        {
+                            "path": "//meta:DefenseTechnologyArea/meta:SubAreaName",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ecc",
+                    "field-path": [
+                        {
+                            "path": "//meta:EffortSecurityClassification",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "edt",
+                    "field-path": [
+                        {
+                            "path": "//meta:EffortEndDate/meta:Date",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "fdc",
+                    "field-path": [
+                        {
+                            "path": "//meta:DODFundingSource/meta:DistributionCode",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "fdr",
+                    "field-path": [
+                        {
+                            "path": "//meta:DODFundingSource/meta:DistributionReason",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "fg",
+                    "field-path": [
+                        {
+                            "path": "//meta:FieldsAndGroups",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:SubjectCategory",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "fnc",
+                    "field-path": [
+                        {
+                            "path": "//meta:FutureNavalCapability/meta:Description",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "fse",
+                    "field-path": [
+                        {
+                            "path": "//meta:FieldsOfScienceEngineering/meta:MainName",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "fsn",
+                    "field-path": [
+                        {
+                            "path": "//meta:NonDODFundingSource/meta:FundingSourceName",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "fss",
+                    "field-path": [
+                        {
+                            "path": "//meta:FieldsOfScienceEngineering/meta:SubAreaName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:FieldsOfScienceEngineering/meta:Other",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "fy",
+                    "field-path": [
+                        {
+                            "path": "//meta:NonDODFundingSource/meta:NonDODFundingAmounts/meta:NonDODFundingAmount/meta:FiscalYear",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:DODFundingSource/meta:DODFundingAmounts/meta:DODFundingAmount/meta:FiscalYear",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ian",
+                    "field-path": [
+                        {
+                            "path": "//meta:IACAccessionNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:IACReportId",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ic",
+                    "field-path": [
+                        {
+                            "path": "//meta:IdentifierClassification/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "id",
+                    "field-path": [
+                        {
+                            "path": "//meta:Identifier",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Keywords",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "idt",
+                    "field-path": [
+                        {
+                            "path": "//meta:IACDocumentType",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "jfc",
+                    "field-path": [
+                        {
+                            "path": "//meta:JointCapabilityArea/meta:Name",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "key",
+                    "field-path": [
+                        {
+                            "path": "//meta:Descriptor",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:FieldAndGroup",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:IACSubjectTerm",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Identifier",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Keywords",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:DefenseTechnologyArea/meta:MainName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:JointCapabilityAreas/meta:JointCapabilityArea/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:FieldsOfScienceEngineering/meta:MainName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:FutureNavalCapabilities/meta:FutureNavalCapability/meta:Description",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ArmyTechnicalCapabilities/meta:ArmyTechnicalCapability/meta:Description",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:AirForceTechnicalCapabilities/meta:AirForceTechnicalCapability/meta:Description",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:LabCoreTechnicalCompetencies/meta:LabCoreTechnicalCompetency/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:SubjectCategories/meta:SubjectCategory/meta:Code",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:SubjectCategories/meta:SubjectCategory/meta:Description",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:MilitarilyCriticalTechnologiesLists/meta:MilitarilyCriticalTechnologiesList/meta:Code",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:MilitarilyCriticalTechnologiesLists/meta:MilitarilyCriticalTechnologiesList/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:DefenseTechnologyArea/meta:SubAreaName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:DefenseTechnologyArea/meta:DefenseTechnologyAreaOther",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:FieldsOfScienceEngineering/meta:SubAreaName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:FieldsOfScienceEngineering/meta:Other",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:CommunityOfInterest/meta:MainName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:CommunityOfInterest/meta:SubAreaName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:BudgetActivityTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:BudgetSubActivityTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:BudgetActivityTitle",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "keynav",
+                    "field-path": [
+                        {
+                            "path": "/mdr:Record/meta:Metadata/meta:Descriptors/meta:Descriptor",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "/mdr:Record/meta:Metadata/meta:FieldsAndGroups/meta:FieldAndGroup/meta:Description",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "/mdr:Record/meta:Metadata/meta:IACSubjectTerms/meta:IACSubjectTerm",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "/mdr:Record/meta:Metadata/meta:Identifiers/meta:Identifier",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Keywords",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:DefenseTechnologyArea/meta:MainName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:JointCapabilityAreas/meta:JointCapabilityArea/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:FieldsOfScienceEngineering/meta:MainName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:FutureNavalCapabilities/meta:FutureNavalCapability/meta:Description",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ArmyTechnicalCapabilities/meta:ArmyTechnicalCapability/meta:Description",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:AirForceTechnicalCapabilities/meta:AirForceTechnicalCapability/meta:Description",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:LabCoreTechnicalCompetencies/meta:LabCoreTechnicalCompetency/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:SubjectCategories/meta:SubjectCategory/meta:Code",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:SubjectCategories/meta:SubjectCategory/meta:Description",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:MilitarilyCriticalTechnologiesLists/meta:MilitarilyCriticalTechnologiesList/meta:Code",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:MilitarilyCriticalTechnologiesLists/meta:MilitarilyCriticalTechnologiesList/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:DefenseTechnologyArea/meta:SubAreaName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:DefenseTechnologyArea/meta:DefenseTechnologyAreaOther",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:FieldsOfScienceEngineering/meta:SubAreaName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:FieldsOfScienceEngineering/meta:Other",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:CommunityOfInterest/meta:MainName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:CommunityOfInterest/meta:SubAreaName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:BudgetActivityTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:BudgetSubActivityTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:BudgetActivityTitle",
+                            "weight": 1.0
+                        }
+                    ],
+                    "field-value-searches": "true"
+                },
+                {
+                    "field-name": "lcn",
+                    "field-path": [
+                        {
+                            "path": "//meta:LocalControlNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:LocalControlNumberPacked",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "lct",
+                    "field-path": [
+                        {
+                            "path": "//meta:LabCoreTechnicalCompetency/meta:Name",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ma",
+                    "field-path": [
+                        {
+                            "path": "//meta:MonitorAcronyms",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "mct",
+                    "field-path": [
+                        {
+                            "path": "//meta:MilitarilyCriticalTechnologiesList/meta:Name",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "md",
+                    "field-path": [
+                        {
+                            "path": "//meta:Metadata",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:LineItemList",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:R2ExhibitList",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "mec",
+                    "field-path": [
+                        {
+                            "path": "//meta:MediaType/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ms",
+                    "field-path": [
+                        {
+                            "path": "//meta:MonitorSeries",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "nu",
+                    "field-path": [
+                        {
+                            "path": "//meta:AccessionDocNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Metadata/meta:AccessionNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ContractNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ContractNumbers",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//mdr:FileName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:IACAccessionNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:IACReportId",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:LinkingAccessionNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:LocalControlNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:LocalControlNumberPacked",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:MediaDocumentNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:MonitorAcronyms",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:MonitorSeries",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//mdr:PDFName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ProgramElement",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ProjectNumbers",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ProjectNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ReportNumbers",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ReportNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:TaskNumbers",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:TaskNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:TransferNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ReplacedBy",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:LineItemNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:AppropriationNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:ProgramElementNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:AppropriationCode",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "org",
+                    "field-path": [
+                        {
+                            "path": "//meta:OrganizationType/meta:Code",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:OrganizationType/meta:Description",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:OrganizationSourceOrganizationCategory",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pag",
+                    "field-path": [
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:OrganizationSourceInstallation/meta:OrganizationSourceComponent/meta:Name",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pcc",
+                    "field-path": [
+                        {
+                            "path": "//meta:PerformingOrganization/meta:CageCodeOrganization/meta:CageCode",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pdg",
+                    "field-path": [
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:OrganizationSourceInstallation/meta:OrganizationSourceComponent/meta:Digraph",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pau",
+                    "field-path": [
+                        {
+                            "path": "//meta:PersonalAuthor",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:PerformingIndividuals/meta:PerformingIndividual/meta:Name",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pe",
+                    "field-path": [
+                        {
+                            "path": "//meta:ProgramElement",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:ProgramElementNumber",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pit",
+                    "field-path": [
+                        {
+                            "path": "//meta:JournalProduct/meta:ArticleTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:TechnicalReportProduc/meta:Title",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pj",
+                    "field-path": [
+                        {
+                            "path": "//meta:ProjectNumber1",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ProjectNumber2",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ProjectNumber3",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ProjectNumber",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pjp",
+                    "field-path": [
+                        {
+                            "path": "//meta:ProjectNumbers",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ProjectNumber",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "plz",
+                    "field-path": [
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:PostalCode",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:ZipCode",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:CageCodeOrganization/meta:ZipCode",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pm",
+                    "field-path": [
+                        {
+                            "path": "//meta:PerformanceMethod/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "poa",
+                    "field-path": [
+                        {
+                            "path": "//meta:CorporateAuthor",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:CompanyName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:CageCodeOrganization/meta:CompanyName",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pran",
+                    "field-path": [
+                        {
+                            "path": "//meta:TechnicalReportProduct/meta:AccessionDocNumber",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "prn",
+                    "field-path": [
+                        {
+                            "path": "//meta:TechnicalReportProduct/meta:ReportNumber/meta:Punctuated",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:TechnicalReportProduct/meta:ReportNumber/meta:Unpunctuated",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "psc",
+                    "field-path": [
+                        {
+                            "path": "//meta:SourceCode",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:OrganizationSourceActivityCode",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pst",
+                    "field-path": [
+                        {
+                            "path": "//meta:PerformingOrganization/meta:CageCodeOrganization/meta:State",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:State",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:State",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ran",
+                    "field-path": [
+                        {
+                            "path": "//meta:ResponsibleOrganization",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ras",
+                    "field-path": [
+                        {
+                            "path": "//meta:OrganizationSourceComponent/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:OrganizationSourceComponent/meta:Digraph",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ServiceAgencyAcronym",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ServiceAgencyName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:ServiceAgencyName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:ServiceAgencyName",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "rc",
+                    "field-path": [
+                        {
+                            "path": "//meta:ReportClassification/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "rd",
+                    "field-path": [
+                        {
+                            "path": "//meta:ReportDate/meta:Date",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:DateOfSummary/meta:Date",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "rdg",
+                    "field-path": [
+                        {
+                            "path": "//meta:ResponsibleOrganization/meta:OrganizationSourceActivity/meta:OrganizationSourceInstallation/meta:OrganizationSourceComponent/meta:Digraph",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "rdt",
+                    "field-path": [
+                        {
+                            "path": "//meta:ReportDate/meta:String",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "rgc",
+                    "field-path": [
+                        {
+                            "path": "//meta:Regrade/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "rin",
+                    "field-path": [
+                        {
+                            "path": "//meta:ResponsibleOrganization/meta:ResponsibleIndividuals/meta:ResponsibleIndividual/meta:Name",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "rls",
+                    "field-path": [
+                        {
+                            "path": "//meta:ResponsibleOrganization/meta:OrganizationSourceActivity/meta:State",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "rlz",
+                    "field-path": [
+                        {
+                            "path": "//meta:ResponsibleOrganization/meta:OrganizationSourceActivity/meta:PostalCode",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "rn",
+                    "field-path": [
+                        {
+                            "path": "//meta:ReportNumbers",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ReportNumber",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "rpt",
+                    "field-path": [
+                        {
+                            "path": "//meta:ResponsibleOrganization/meta:OrganizationSourceActivity/meta:OrganizationSourceOrganizationCategory/meta:OrganizationType",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "rsc",
+                    "field-path": [
+                        {
+                            "path": "//meta:ResponsibleOrganization/meta:OrganizationSourceActivity/meta:OrganizationSourceActivityCode",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "saa",
+                    "field-path": [
+                        {
+                            "path": "//meta:OrganizationSourceComponent/meta:Acronym",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ServiceAgencyAcronym",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "sc",
+                    "field-path": [
+                        {
+                            "path": "//meta:SourceCode",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ResponsibleOrganization/meta:OrganizationSourceActivity/meta:OrganizationSourceActivityCode",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:OrganizationSourceActivityCode",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:CageCodeOrganization/meta:CageCode",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "sdt",
+                    "field-path": [
+                        {
+                            "path": "//meta:EffortStartDate/meta:Date",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "se",
+                    "field-path": [
+                        {
+                            "path": "//meta:StatusOfEffort/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "si",
+                    "field-path": [
+                        {
+                            "path": "//meta:PerformanceType/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "sic",
+                    "field-path": [
+                        {
+                            "path": "//meta:SpecialIndicator/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "sit",
+                    "field-path": [
+                        {
+                            "path": "//meta:DocumentLocation",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "tc",
+                    "field-path": [
+                        {
+                            "path": "//meta:TitleClassification/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "ti",
+                    "field-path": [
+                        {
+                            "path": "//meta:Title",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:UnclassifiedTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ClassifiedTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:Annotation",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:LineItemTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:ProgramElementTitle",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "tis",
+                    "field-path": [
+                        {
+                            "path": "//meta:Title",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:UnclassifiedTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//proc:LineItemTitle",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:ProgramElementTitle",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "tn",
+                    "field-path": [
+                        {
+                            "path": "//meta:TaskNumber1",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:TaskNumber2",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:TaskNumber",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "tnp",
+                    "field-path": [
+                        {
+                            "path": "//meta:TaskNumbers",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:TaskNumbers",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "totaldodfunding",
+                    "field-path": [
+                        {
+                            "path": "//meta:DODFundingSources/meta:TotalDODFunding",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "totalnondodfunding",
+                    "field-path": [
+                        {
+                            "path": "//meta:NonDODFundingSources/meta:TotalNonDODFunding",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "tre",
+                    "field-path": [
+                        {
+                            "path": "//meta:TechnologyReadinessLevel/meta:Level",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "trt",
+                    "field-path": [
+                        {
+                            "path": "//meta:CitationStatus/meta:Code",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:TransactionType/meta:Code",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "upd",
+                    "field-path": [
+                        {
+                            "path": "//meta:DateCitationUpdated/meta:Date",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "agreementIDField",
+                    "field-path": [
+                        {
+                            "path": "//agreement:agreementID",
+                            "weight": 1.0
+                        }
+                    ],
+                    "field-value-searches": "true"
+                },
+                {
+                    "field-name": "externalIDField",
+                    "field-path": [
+                        {
+                            "path": "//agreement:externalID",
+                            "weight": 1.0
+                        }
+                    ],
+                    "field-value-searches": "true"
+                }
+            ],
+            "range-field-index": [
+                {
+                    "scalar-type": "string",
+                    "field-name": "au",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "string",
+                    "field-name": "by",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "string",
+                    "field-name": "ca",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "string",
+                    "field-name": "crd",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "string",
+                    "field-name": "edt",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "int",
+                    "field-name": "fy",
+                    "collation": "",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "string",
+                    "field-name": "keynav",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "date",
+                    "field-name": "rd",
+                    "collation": "",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "string",
+                    "field-name": "rd",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "string",
+                    "field-name": "rdt",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "date",
+                    "field-name": "rdt",
+                    "collation": "",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "string",
+                    "field-name": "sdt",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "int",
+                    "field-name": "totaldodfunding",
+                    "collation": "",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "int",
+                    "field-name": "totalnondodfunding",
+                    "collation": "",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "string",
+                    "field-name": "upd",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "date",
+                    "field-name": "upd",
+                    "collation": "",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                }
+            ]
