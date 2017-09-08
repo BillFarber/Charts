@@ -6,7 +6,7 @@ declare namespace mdr="http://dtic.mil/mdr/record";
 declare namespace meta="http://dtic.mil/mdr/record/meta";
 
 let $funding := ured-model:get-funding()
-let $draw-script := fn:concat("var stateData = ", $funding[1],"; var funding = ", $funding[2], ";")
+let $draw-script := fn:concat("var stateData = ", $funding[1],"; var funding = ", $funding[2], "; var minStateFunding = ", $funding[3], "; var maxStateFunding = ", $funding[4], ";")
 
 let $_ := xdmp:set-response-content-type('text/html')
 return (

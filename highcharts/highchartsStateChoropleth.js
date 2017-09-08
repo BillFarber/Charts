@@ -36,7 +36,8 @@ $(function() {
         },
 
         colorAxis : {
-            min : 50000000,
+            min : minStateFunding,
+            max : maxStateFunding,
             type : 'linear',
             minColor : '#EEEEFF',
             maxColor : '#000022',
