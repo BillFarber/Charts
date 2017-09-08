@@ -17,5 +17,87 @@
             "range-value-positions": false,
             "scalar-type": "string"
         }
+    ],
+    "path-namespace": [
+                {
+                    "prefix": "mdr",
+                    "namespace-uri": "http://dtic.mil/mdr/record"
+                },
+                {
+                    "prefix": "meta",
+                    "namespace-uri": "http://dtic.mil/mdr/record/meta"
+                }
+    ],
+    "field": [
+                {
+                    "field-name": "poa",
+                    "field-path": [
+                        {
+                            "path": "//meta:CorporateAuthor",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:Name",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:CompanyName",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:CageCodeOrganization/meta:CompanyName",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "pst",
+                    "field-path": [
+                        {
+                            "path": "//meta:PerformingOrganization/meta:CageCodeOrganization/meta:State",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:OrganizationSourceActivity/meta:State",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:PerformingOrganization/meta:State",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
+                    "field-name": "totaldodfunding",
+                    "field-path": [
+                        {
+                            "path": "//meta:DODFundingSources/meta:TotalDODFunding",
+                            "weight": 1.0
+                        }
+                    ]
+                }
+    ],
+    "range-field-index": [
+                {
+                    "scalar-type": "string",
+                    "field-name": "poa",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "string",
+                    "field-name": "pst",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
+                    "scalar-type": "int",
+                    "field-name": "totaldodfunding",
+                    "collation": "",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                }
     ]
 }
