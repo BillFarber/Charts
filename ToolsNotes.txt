@@ -1,0 +1,39 @@
+Need to look at:
+https://blog.udacity.com/2016/03/12-best-charting-libraries-for-web-developers.html
+
+
+Cytoscape - Cytoscape is an open source software platform for visualizing complex networks and integrating these with any type of attribute data
+www.cytoscape.org
+This worked well for displaying networks and data connections.
+GNU Lesser General Public License
+
+
+Google Charts - Google chart tools are powerful, simple to use, and free. Try out our rich gallery of interactive charts and data tools. 
+https://developers.google.com/chart/
+Fantastic library
+License prevents downloading and hosting locally. Seems like a killer to me.
+
+
+HighCharts
+https://www.highcharts.com/
+Free for non-commercial and government use.
+
+
+D3 - Data-Driven Documents 
+https://d3js.org/
+
+
+DataMaps - Customizable SVG map visualizations for the web in a single Javascript file using D3.js
+http://datamaps.github.io/
+Frustrating
+
+
+d3-geomap - Create Geographic Maps for the Web
+d3-geomap.github.io/
+Frustrating
+
+
+Simple Map D3 - Easy "choropleth" style maps with D3.
+http://code.minnpost.com/simple-map-d3/
+Forces download of large amounts of Node libraries
+MIT License
