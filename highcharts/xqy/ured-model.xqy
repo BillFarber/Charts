@@ -7,13 +7,13 @@ declare namespace meta="http://dtic.mil/mdr/record/meta";
 
 declare variable $MAX-DOCUMENTS := 100000;
 
-declare function ured-model:get-funding() {
-    ured-model:get-complex-funding-from-docs()
+declare function ured-model:get-funding($query-text) {
+    ured-model:get-complex-funding-from-tuples($query-text)
 };
 
-declare function ured-model:get-complex-funding-from-tuples() {
+declare function ured-model:get-complex-funding-from-tuples($query-text) {
     let $_ := xdmp:log("TUPLES")
-    let $tuples := ured-model:get-matching-tuples()
+    let $tuples := ured-model:get-matching-tuples($query-text)
 let $_ := xdmp:log(("count", fn:count($tuples)))
 
     let $state-funding-by-organization := map:map()
@@ -70,16 +70,24 @@ declare function ured-model:group-state-funding-by-organization($state-funding-b
             return map:put($state-funding-by-organization, $state-code, $stateMap)
 };
 
-declare function ured-model:get-matching-tuples() {
-    cts:value-tuples(
-        (
-            cts:field-reference("poa"),
-            cts:field-reference("pst"),
-            cts:field-reference("totaldodfunding")
-        ),
-        (),
-        cts:collection-query("/citation/URED")
-    )
+declare function ured-model:get-matching-tuples($query-text) {
+    let $word-query :=
+        if ($query-text) then
+            cts:word-query($query-text)
+        else ()
+    return
+        cts:value-tuples(
+            (
+                cts:field-reference("poa"),
+                cts:field-reference("pst"),
+                cts:field-reference("totaldodfunding")
+            ),
+            (),
+            cts:and-query((
+                cts:collection-query("/citation/URED"),
+                $word-query
+            ))
+        )
 };
 
 declare function ured-model:get-complex-funding-from-docs() {

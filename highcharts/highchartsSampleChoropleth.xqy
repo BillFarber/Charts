@@ -5,7 +5,10 @@ import module namespace ured-model = "http://org.billFarber.marklogic/charts/ure
 declare namespace mdr="http://dtic.mil/mdr/record";
 declare namespace meta="http://dtic.mil/mdr/record/meta";
 
-let $funding := ured-model:get-funding()
+let $query-text := xdmp:get-request-field("queryText")
+let $_ := xdmp:log(("$query-text",$query-text))
+
+let $funding := ured-model:get-funding($query-text)
 let $draw-script := fn:concat("var stateData = ", $funding[1],"; var funding = ", $funding[2], "; var minStateFunding = ", $funding[3], "; var maxStateFunding = ", $funding[4], ";")
 
 let $_ := xdmp:set-response-content-type('text/html')
@@ -26,6 +29,13 @@ return (
             <script src='/highcharts/highchartsStateChoropleth.js'>&nbsp;</script>
         </head>
         <body>
+            <div id="queryInput">
+                 <form action="/highcharts/highchartsSampleChoropleth.xqy">
+                    Query:<br></br>
+                    <input type="text" name="queryText" value="{$query-text}"></input><br></br>
+                    <input type="submit" value="Submit"></input>
+                </form> 
+            </div>
             <div id='container' style='height: 600px; min-width: 400px; max-width: 700px; margin: 0 auto'></div>
         </body>
     </html>
