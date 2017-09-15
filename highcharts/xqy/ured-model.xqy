@@ -80,7 +80,8 @@ declare function ured-model:get-matching-tuples($query-text) {
             (
                 cts:field-reference("poa"),
                 cts:field-reference("pst"),
-                cts:field-reference("totaldodfunding")
+                cts:field-reference("totaldodfunding"),
+                cts:element-reference(xs:QName("meta:ProgramElement"))
             ),
             (),
             cts:and-query((

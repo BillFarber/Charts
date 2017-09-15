@@ -19,11 +19,11 @@
         },
         {
             "invalid-values": "reject",
-            "collation": "",
+            "collation": "http://marklogic.com/collation/",
             "localname": "TotalDODFunding",
             "namespace-uri": "http://dtic.mil/mdr/record/meta",
             "range-value-positions": false,
-            "scalar-type": "long"
+            "scalar-type": "string"
         }
     ],
     "path-namespace": [
