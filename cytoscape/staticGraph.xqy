@@ -1,6 +1,16 @@
 xquery version "1.0-ml";
 
 declare option xdmp:mapping "false";
+
+import module namespace ured-model = "http://org.billFarber.marklogic/charts/ured" at "/models/ured-model.xqy";
+
+declare namespace mdr="http://dtic.mil/mdr/record";
+declare namespace meta="http://dtic.mil/mdr/record/meta";
+
+let $ured-an := ""
+let $funding := ured-model:get-ured-links($ured-an)
+
+return
 (
   xdmp:set-response-content-type("text/html"),
   "<!DOCTYPE html>",
