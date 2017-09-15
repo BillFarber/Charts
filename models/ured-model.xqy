@@ -7,6 +7,10 @@ declare namespace meta="http://dtic.mil/mdr/record/meta";
 
 declare variable $MAX-DOCUMENTS := 100000;
 
+declare function ured-model:get-ured-links($ured-accession-number) {
+    ()
+};
+
 declare function ured-model:get-funding($query-text) {
     ured-model:get-complex-funding-from-tuples($query-text)
 };
