@@ -2,15 +2,15 @@
     "database-name":"Charts",
     "range-element-index": [
         {
-            "invalid-values": "reject",
-            "collation": "",
-            "localname": "ProgramElement",
+            "invalid-values": "ignore",
+            "collation": "http://marklogic.com/collation/",
+            "localname": "ContractNumber",
             "namespace-uri": "http://dtic.mil/mdr/record/meta",
             "range-value-positions": false,
-            "scalar-type": "long"
+            "scalar-type": "string"
         },
         {
-            "invalid-values": "reject",
+            "invalid-values": "ignore",
             "collation": "http://marklogic.com/collation/",
             "localname": "State",
             "namespace-uri": "http://dtic.mil/mdr/record/meta",
@@ -18,7 +18,7 @@
             "scalar-type": "string"
         },
         {
-            "invalid-values": "reject",
+            "invalid-values": "ignore",
             "collation": "http://marklogic.com/collation/",
             "localname": "TotalDODFunding",
             "namespace-uri": "http://dtic.mil/mdr/record/meta",
@@ -86,6 +86,13 @@
                 }
     ],
     "range-field-index": [
+                {
+                    "scalar-type": "string",
+                    "field-name": "pe",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
                 {
                     "scalar-type": "string",
                     "field-name": "poa",
