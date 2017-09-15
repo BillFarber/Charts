@@ -4,7 +4,7 @@
         {
             "invalid-values": "reject",
             "collation": "",
-            "localname": "TotalDODFunding",
+            "localname": "ProgramElement",
             "namespace-uri": "http://dtic.mil/mdr/record/meta",
             "range-value-positions": false,
             "scalar-type": "long"
@@ -16,6 +16,14 @@
             "namespace-uri": "http://dtic.mil/mdr/record/meta",
             "range-value-positions": false,
             "scalar-type": "string"
+        },
+        {
+            "invalid-values": "reject",
+            "collation": "",
+            "localname": "TotalDODFunding",
+            "namespace-uri": "http://dtic.mil/mdr/record/meta",
+            "range-value-positions": false,
+            "scalar-type": "long"
         }
     ],
     "path-namespace": [
