@@ -34,9 +34,26 @@
                 {
                     "prefix": "meta",
                     "namespace-uri": "http://dtic.mil/mdr/record/meta"
+                },
+                {
+                    "prefix": "r2",
+                    "namespace-uri": "http://www.dtic.mil/comptroller/xml/schema/022009/r2"
                 }
     ],
     "field": [
+                {
+                    "field-name": "pe",
+                    "field-path": [
+                        {
+                            "path": "//meta:ProgramElement",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//r2:ProgramElementNumber",
+                            "weight": 1.0
+                        }
+                    ]
+                },
                 {
                     "field-name": "poa",
                     "field-path": [

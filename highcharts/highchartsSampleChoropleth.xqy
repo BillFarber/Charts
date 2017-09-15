@@ -1,6 +1,6 @@
 xquery version "1.0-ml";
 
-import module namespace ured-model = "http://org.billFarber.marklogic/charts/ured" at "/highcharts/xqy/ured-model.xqy";
+import module namespace ured-model = "http://org.billFarber.marklogic/charts/ured" at "/models/ured-model.xqy";
 
 declare namespace mdr="http://dtic.mil/mdr/record";
 declare namespace meta="http://dtic.mil/mdr/record/meta";
