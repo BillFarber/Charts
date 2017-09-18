@@ -8,7 +8,9 @@ declare namespace meta="http://dtic.mil/mdr/record/meta";
 declare option xdmp:mapping "false";
 
 let $ured-accession-number := "EF000000"
-let $funding := ured-model:get-ured-links($ured-accession-number)
+let $elements := ured-model:get-funding-elements($ured-accession-number)
+let $elements-script := fn:concat("var elements = ", $elements,";")
+let $_ := xdmp:log(("$elements-script",$elements-script))
 
 return
 (
@@ -30,29 +32,9 @@ return
         <div>
           <p>Cytoscape</p>
           <div id="cytoscape-container"></div>
+          <script type="text/javascript">{$elements-script}</script>
           <script src="/cytoscape/lib/cytoscape.js"></script>
-          <script src="/cytoscape/staticGraph.js"></script>
-          <script>{"
-            cy.add([
-                { group: 'nodes', data: { id: 'Jacob', ring: 3, label: 'Ja' } },
-                { group: 'nodes', data: { id: 'Allison', ring: 3, label: 'A' } },
-                { group: 'edges', data: { id: 'PhilChild3', source: 'Phil', predicate:'HasASon', target: 'Jacob' } },
-                { group: 'edges', data: { id: 'ShariChild3', source: 'Shari', predicate:'HasASon', target: 'Jacob' } },
-                { group: 'edges', data: { id: 'PhilChild4', source: 'Phil', predicate:'HasADaughter', target: 'Allison' } },
-                { group: 'edges', data: { id: 'ShariChild4', source: 'Shari', predicate:'HasADaughter', target: 'Allison' } }
-            ]);
-            var layout = cy.makeLayout({
-              name: 'circle',
-              levelWidth: function() {
-                return 4;
-              },
-              concentric: function( node ){
-                console.log(node._private.data.ring);
-                return node._private.data.ring;
-              }
-            });
-            layout.run();
-          "}</script>
+          <script src="/cytoscape/funding.js"></script>
         </div>
     </body>
   </html>

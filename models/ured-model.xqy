@@ -7,11 +7,11 @@ declare namespace meta = "http://dtic.mil/mdr/record/meta";
 
 declare variable $MAX-DOCUMENTS := 100000;
 
-declare function ured-model:get-ured-links($ured-accession-number) {
-    ured-model:get-ured-links-from-tuples($ured-accession-number)
+declare function ured-model:get-funding-elements($ured-accession-number) {
+    ured-model:get-funding-elements-from-tuples($ured-accession-number)
 };
 
-declare function ured-model:get-ured-links-from-tuples($ured-accession-number) {
+declare function ured-model:get-funding-elements-from-tuples($ured-accession-number) {
     let $an-links := map:map()
     let $_ := map:put($an-links, 'center', $ured-accession-number)
 
@@ -28,20 +28,33 @@ declare function ured-model:get-ured-links-from-tuples($ured-accession-number) {
 
     let $_ := map:put($an-links, 'PEs', $pe-array)
     let $_ := xdmp:log(("$an-links", $an-links))
-    return xdmp:to-json-string($an-links)
+    let $elements := ured-model:create-elements-array($ured-accession-number)
+    return xdmp:to-json-string($elements)
+};
+
+declare function ured-model:create-elements-array($ured-accession-number) {
+    let $elements := json:to-array()
+    let $center-data := map:map()
+    let $_ := map:put($center-data, "id", $ured-accession-number)
+    let $_ := map:put($center-data, "ring", 8)
+    let $_ := map:put($center-data, "label", $ured-accession-number)
+    let $center := map:map()
+    let $_ := map:put($center, "data", $center-data)
+    let $_ := json:array-push($elements, $center)
+    return $elements
 };
 
 declare function ured-model:get-pe-list($ured-accession-number) {
-        cts:value-tuples(
-            (
-                cts:field-reference("pe")
-            ),
-            (),
-            cts:and-query((
-                cts:collection-query("/citation/URED"),
-                cts:element-value-query(xs:QName("meta:AccessionNumber"), $ured-accession-number)
-            ))
-        )
+    cts:value-tuples(
+        (
+            cts:field-reference("pe")
+        ),
+        (),
+        cts:and-query((
+            cts:collection-query("/citation/URED"),
+            cts:element-value-query(xs:QName("meta:AccessionNumber"), $ured-accession-number)
+        ))
+    )
 };
 
 
