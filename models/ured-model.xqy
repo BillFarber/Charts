@@ -2,14 +2,53 @@ xquery version "1.0-ml";
 
 module namespace ured-model = "http://org.billFarber.marklogic/charts/ured";
 
-declare namespace mdr="http://dtic.mil/mdr/record";
-declare namespace meta="http://dtic.mil/mdr/record/meta";
+declare namespace mdr  = "http://dtic.mil/mdr/record";
+declare namespace meta = "http://dtic.mil/mdr/record/meta";
 
 declare variable $MAX-DOCUMENTS := 100000;
 
 declare function ured-model:get-ured-links($ured-accession-number) {
-    ()
+    ured-model:get-ured-links-from-tuples($ured-accession-number)
 };
+
+declare function ured-model:get-ured-links-from-tuples($ured-accession-number) {
+    let $an-links := map:map()
+    let $_ := map:put($an-links, 'center', $ured-accession-number)
+
+    let $pe-tuples := ured-model:get-pe-list($ured-accession-number)
+
+    let $pe-array := json:to-array()
+    let $_ :=
+        for $pe-tuple in $pe-tuples
+        let $program-element := $pe-tuple[1]
+        let $rtwo-array := json:to-array()
+        let $pe-links := map:map()
+        let $_ := map:put($pe-links, $program-element, $rtwo-array)
+        return json:array-push($pe-array, $pe-links)
+
+    let $_ := map:put($an-links, 'PEs', $pe-array)
+    let $_ := xdmp:log(("$an-links", $an-links))
+    return xdmp:to-json-string($an-links)
+};
+
+declare function ured-model:get-pe-list($ured-accession-number) {
+        cts:value-tuples(
+            (
+                cts:field-reference("pe")
+            ),
+            (),
+            cts:and-query((
+                cts:collection-query("/citation/URED"),
+                cts:element-value-query(xs:QName("meta:AccessionNumber"), $ured-accession-number)
+            ))
+        )
+};
+
+
+
+
+
+
 
 declare function ured-model:get-funding($query-text) {
     ured-model:get-complex-funding-from-tuples($query-text)

@@ -10,7 +10,7 @@ return (
                 <li><a href="googleCharts/states-funding.xqy">Google Charts States Choropleth</a></li>
                 <li><a href="googleCharts/country-funding.xqy">Google Charts Country Choropleth</a></li>
                 <br>&nbsp;</br>
-                <li><a href="cytoscape/staticGraph.xqy">Cytoscape Network Graph</a></li>
+                <li><a href="cytoscape/funding.xqy">Funding Link Graph</a></li>
             </ul>
         </body>
     </html>
