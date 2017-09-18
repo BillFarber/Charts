@@ -7,7 +7,7 @@ declare namespace meta="http://dtic.mil/mdr/record/meta";
 
 declare option xdmp:mapping "false";
 
-let $ured-accession-number := "EF000000"
+let $ured-accession-number := "EF000003"
 let $elements := ured-model:get-funding-elements($ured-accession-number)
 let $elements-script := fn:concat("var elements = ", $elements,";")
 let $_ := xdmp:log(("$elements-script",$elements-script))

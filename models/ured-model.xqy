@@ -4,6 +4,7 @@ module namespace ured-model = "http://org.billFarber.marklogic/charts/ured";
 
 declare namespace mdr  = "http://dtic.mil/mdr/record";
 declare namespace meta = "http://dtic.mil/mdr/record/meta";
+declare namespace r2   = "http://www.dtic.mil/comptroller/xml/schema/022009/r2";
 
 declare variable $MAX-DOCUMENTS := 100000;
 
@@ -20,27 +21,82 @@ declare function ured-model:get-funding-elements-from-tuples($ured-accession-num
     let $pe-array := json:to-array()
     let $_ :=
         for $pe-tuple in $pe-tuples
-        let $program-element := $pe-tuple[1]
-        let $rtwo-array := json:to-array()
+        let $pe := $pe-tuple[1]
+        let $r2-array := ured-model:get-r2-array-from-pe($pe)
         let $pe-links := map:map()
-        let $_ := map:put($pe-links, $program-element, $rtwo-array)
+        let $_ := map:put($pe-links, "PE", $pe)
+        let $_ := map:put($pe-links, "List", $r2-array)
         return json:array-push($pe-array, $pe-links)
 
     let $_ := map:put($an-links, 'PEs', $pe-array)
     let $_ := xdmp:log(("$an-links", $an-links))
-    let $elements := ured-model:create-elements-array($ured-accession-number)
+    let $elements := ured-model:create-elements-array($an-links)
     return xdmp:to-json-string($elements)
 };
 
-declare function ured-model:create-elements-array($ured-accession-number) {
+declare function ured-model:get-r2-array-from-pe($pe) {
+    let $r2-uris := cts:uris(
+        (),
+        (),
+        cts:and-query((
+            cts:collection-query("/citation/R2"),
+            cts:element-value-query(xs:QName("r2:ProgramElementNumber"), $pe)
+        ))
+    )
+    let $_ := xdmp:log(("$r2-uris", $r2-uris))
+    let $r-array := json:to-array()
+    let $_ :=
+        for $r2-uri in $r2-uris
+        let $r2-accession-number := fn:tokenize(fn:tokenize($r2-uri, "/")[4],"\.")[1]
+        return json:array-push($r-array, $r2-accession-number)
+    return $r-array
+};
+
+declare function ured-model:create-elements-array($an-links) {
     let $elements := json:to-array()
+    
     let $center-data := map:map()
-    let $_ := map:put($center-data, "id", $ured-accession-number)
+    let $accession-number := map:get($an-links, "center")
+    let $_ := map:put($center-data, "id", $accession-number)
     let $_ := map:put($center-data, "ring", 8)
-    let $_ := map:put($center-data, "label", $ured-accession-number)
+    let $_ := map:put($center-data, "label", $accession-number)
     let $center := map:map()
     let $_ := map:put($center, "data", $center-data)
     let $_ := json:array-push($elements, $center)
+
+
+    let $pe-obj-list := map:get($an-links, "PEs")
+    let $pe-ct := json:array-size($pe-obj-list)
+
+    let $_ :=
+        for $i in (1 to $pe-ct)
+        let $pe-obj := json:array-values($pe-obj-list)[$i]
+        let $pe := map:get($pe-obj, "PE")
+        let $rtwo-an-list := map:get($pe-obj, "List")
+        let $_ := xdmp:log(("$rtwo-an-list", $rtwo-an-list))
+
+        let $an-ct := json:array-size($rtwo-an-list)
+        for $j in (1 to $an-ct)
+        let $rtwo-an := json:array-values($rtwo-an-list)[$j]
+            
+        let $element-data := map:map()
+        let $_ := map:put($element-data, "id", $rtwo-an)
+        let $_ := map:put($element-data, "ring", 4)
+        let $_ := map:put($element-data, "label", $rtwo-an)
+        let $element := map:map()
+        let $_ := map:put($element, "data", $element-data)
+        let $_ := json:array-push($elements, $element)
+            
+        let $element-data := map:map()
+        let $id := fn:concat($accession-number,"to",$rtwo-an)
+        let $_ := map:put($element-data, "id", $id)
+        let $_ := map:put($element-data, "source", $accession-number)
+        let $_ := map:put($element-data, "predicate", $pe)
+        let $_ := map:put($element-data, "target", $rtwo-an)
+        let $element := map:map()
+        let $_ := map:put($element, "data", $element-data)
+        return json:array-push($elements, $element)
+    
     return $elements
 };
 
