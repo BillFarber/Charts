@@ -124,7 +124,7 @@ declare function ured-model:create-elements-array($an-links) {
                 let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number, "r2")
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
-                let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $pe, $link-accession-number)
+                let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $pe, $link-accession-number, "pe")
                 return json:array-push($elements, $edge-element)
 
     let $ct-obj-list := map:get($an-links, "CT_Links")
@@ -136,7 +136,7 @@ declare function ured-model:create-elements-array($an-links) {
                 let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number, "tr")
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
-                let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $ct, $link-accession-number)
+                let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $ct, $link-accession-number, "ct")
                 return json:array-push($elements, $edge-element)
 
     return $elements
@@ -153,7 +153,7 @@ declare function ured-model:create-node-element($id, $ring, $label, $classes) {
     return $element
 };
 
-declare function ured-model:create-edge-element($id, $source, $predicate, $target) {
+declare function ured-model:create-edge-element($id, $source, $predicate, $target, $classes) {
     let $element-data := map:map()
     let $_ := map:put($element-data, "id", $id)
     let $_ := map:put($element-data, "source", $source)
@@ -161,6 +161,7 @@ declare function ured-model:create-edge-element($id, $source, $predicate, $targe
     let $_ := map:put($element-data, "target", $target)
     let $element := map:map()
     let $_ := map:put($element, "data", $element-data)
+    let $_ := map:put($element, "classes", $classes)
     return $element
 };
 

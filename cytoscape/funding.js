@@ -26,21 +26,24 @@ var cy = cytoscape({
             'label' : 'data(label)'
         }
     }, {
-        selector : 'edge',
+        selector : 'edge.pe',
         style : {
             'width' : 1,
-            'line-color' : '#3CC',
-            'color' : '#3CC',
+            'line-color' : '#6666FF',
+            'color' : '#6666FF',
+            'mid-target-arrow-color' : '#6666FF',
+            'mid-target-arrow-shape' : 'diamond',
+            'mid-target-arrow-fill' : 'filled',
             'source-label' : 'data(predicate)',
             'source-text-offset' : 100
         }
     }, {
-        selector : 'edge.foobar',
+        selector : 'edge.ct',
         style : {
             'width' : 1,
-            'line-color' : '#C33',
-            'color' : '#C33',
-            'mid-target-arrow-color' : '#C33',
+            'line-color' : '#FF6666',
+            'color' : '#FF6666',
+            'mid-target-arrow-color' : '#FF6666',
             'mid-target-arrow-shape' : 'diamond',
             'mid-target-arrow-fill' : 'filled',
             'source-label' : 'data(predicate)',
