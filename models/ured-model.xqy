@@ -17,6 +17,7 @@ declare function ured-model:get-funding-elements-from-tuples($ured-accession-num
     let $_ := map:put($an-links, "Center_Node", $ured-accession-number)
 
     let $pe-tuples := ured-model:get-pe-list($ured-accession-number)
+    let $ct-tuples := ured-model:get-ct-list($ured-accession-number)
 
     let $pe-array := json:to-array()
     let $_ :=
@@ -100,6 +101,19 @@ declare function ured-model:get-pe-list($ured-accession-number) {
     cts:value-tuples(
         (
             cts:field-reference("pe")
+        ),
+        (),
+        cts:and-query((
+            cts:collection-query("/citation/URED"),
+            cts:element-value-query(xs:QName("meta:AccessionNumber"), $ured-accession-number)
+        ))
+    )
+};
+
+declare function ured-model:get-ct-list($ured-accession-number) {
+    cts:value-tuples(
+        (
+            cts:field-reference("ct")
         ),
         (),
         cts:and-query((

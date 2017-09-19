@@ -42,6 +42,26 @@
     ],
     "field": [
                 {
+                    "field-name": "ct",
+                    "field-path": [
+                        {
+                            "path": "//meta:ContractNumbers",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:ContractNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:LocalControlNumber",
+                            "weight": 1.0
+                        },
+                        {
+                            "path": "//meta:TransferNumber",
+                            "weight": 1.0
+                        }                    ]
+                },
+                {
                     "field-name": "pe",
                     "field-path": [
                         {
@@ -103,6 +123,13 @@
                 }
     ],
     "range-field-index": [
+                {
+                    "scalar-type": "string",
+                    "field-name": "ct",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
                 {
                     "scalar-type": "string",
                     "field-name": "pe",
