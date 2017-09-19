@@ -66,7 +66,12 @@ var cy = cytoscape({
 });
 
     cy.elements('.ured').qtip({
-        content: function(){ return 'URED document: ' + this.id() }
+        content: {
+            text: function(){
+                var tip = this._private.data.tip;
+                return $('<div><u>'+tip+'</u></div>');
+            }
+        }
     });
 
     cy.elements('.r2').qtip({

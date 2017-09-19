@@ -55,7 +55,6 @@ declare function ured-model:get-r2-array-from-pe($pe) {
             cts:element-value-query(xs:QName("r2:ProgramElementNumber"), $pe)
         ))
     )
-    let $_ := xdmp:log(("$r2-uris", $r2-uris))
     let $r-array := json:to-array()
     let $_ :=
         for $r2-uri in $r2-uris
@@ -73,7 +72,6 @@ declare function ured-model:get-tr-array-from-ct($ct) {
             cts:field-value-query("ctPunctuated", $ct)
         ))
     )
-    let $_ := xdmp:log(("$tr-uris", $tr-uris))
     let $tr-array := json:to-array()
     let $_ :=
         for $tr-uri in $tr-uris
@@ -112,7 +110,8 @@ declare function ured-model:create-elements-array($an-links) {
     let $elements := json:to-array()
 
     let $center-accession-number := map:get($an-links, "Center_Node")
-    let $center-element := ured-model:create-node-element($center-accession-number, 8, $center-accession-number, "ured")
+    let $tip-content := ured-model:get-ured-tip-content($center-accession-number)
+    let $center-element := ured-model:create-node-element($center-accession-number, 8, $center-accession-number, "ured", $tip-content)
     let $_ := json:array-push($elements, $center-element)
 
     let $pe-obj-list := map:get($an-links, "PE_Links")
@@ -121,7 +120,7 @@ declare function ured-model:create-elements-array($an-links) {
             let $pe := map:get($pe-obj, "PE")
             let $link-list := map:get($pe-obj, "Links")
             for $link-accession-number in json:array-values($link-list)
-                let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number, "r2")
+                let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number, "r2", ())
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
                 let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $pe, $link-accession-number, "pe")
@@ -133,7 +132,7 @@ declare function ured-model:create-elements-array($an-links) {
             let $ct := map:get($ct-obj, "CT")
             let $link-list := map:get($ct-obj, "Links")
             for $link-accession-number in json:array-values($link-list)
-                let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number, "tr")
+                let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number, "tr", ())
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
                 let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $ct, $link-accession-number, "ct")
@@ -142,11 +141,12 @@ declare function ured-model:create-elements-array($an-links) {
     return $elements
 };
 
-declare function ured-model:create-node-element($id, $ring, $label, $classes) {
+declare function ured-model:create-node-element($id, $ring, $label, $classes, $tip-content as xs:string?) {
     let $element-data := map:map()
     let $_ := map:put($element-data, "id", $id)
     let $_ := map:put($element-data, "ring", $ring)
     let $_ := map:put($element-data, "label", $label)
+    let $_ := map:put($element-data, "tip", $tip-content)
     let $element := map:map()
     let $_ := map:put($element, "data", $element-data)
     let $_ := map:put($element, "classes", $classes)
@@ -165,6 +165,14 @@ declare function ured-model:create-edge-element($id, $source, $predicate, $targe
     return $element
 };
 
+declare function ured-model:get-ured-tip-content($ured-accession-number) {
+    let $uri := fn:concat("/citation/URED/",$ured-accession-number,".xml")
+    let $doc := fn:doc($uri)
+    let $title := xs:string($doc/mdr:Record/meta:Metadata/meta:Title)
+    let $tip := $title
+    return $tip
+};
+
 
 
 
@@ -178,7 +186,6 @@ declare function ured-model:get-funding($query-text) {
 declare function ured-model:get-complex-funding-from-tuples($query-text) {
     let $_ := xdmp:log("TUPLES")
     let $tuples := ured-model:get-matching-tuples($query-text)
-let $_ := xdmp:log(("count", fn:count($tuples)))
 
     let $state-funding-by-organization := map:map()
     let $_ :=
@@ -258,7 +265,6 @@ declare function ured-model:get-matching-tuples($query-text) {
 declare function ured-model:get-complex-funding-from-docs() {
     let $_ := xdmp:log("DOCS")
     let $docs := ured-model:get-matching-documents()
-let $_ := xdmp:log(("count", fn:count($docs)))
 
     let $state-funding-by-organization := map:map()
     let $_ :=
