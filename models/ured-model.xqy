@@ -29,7 +29,18 @@ declare function ured-model:get-funding-elements-from-tuples($ured-accession-num
         let $_ := map:put($pe-links, "Links", $r2-array)
         return json:array-push($pe-array, $pe-links)
 
+    let $ct-array := json:to-array()
+    let $_ :=
+        for $ct-tuple in $ct-tuples
+        let $ct := $ct-tuple[1]
+        let $tr-array := ured-model:get-tr-array-from-ct($ct)
+        let $ct-links := map:map()
+        let $_ := map:put($ct-links, "CT", $ct)
+        let $_ := map:put($ct-links, "Links", $tr-array)
+        return json:array-push($ct-array, $ct-links)
+
     let $_ := map:put($an-links, 'PE_Links', $pe-array)
+    let $_ := map:put($an-links, 'CT_Links', $ct-array)
     let $_ := xdmp:log(("$an-links", $an-links))
     let $elements := ured-model:create-elements-array($an-links)
     return xdmp:to-json-string($elements)
@@ -53,9 +64,53 @@ declare function ured-model:get-r2-array-from-pe($pe) {
     return $r-array
 };
 
+declare function ured-model:get-tr-array-from-ct($ct) {
+    let $tr-uris := cts:uris(
+        (),
+        (),
+        cts:and-query((
+            cts:collection-query("/citation/TR"),
+            cts:field-value-query("ctPunctuated", $ct)
+        ))
+    )
+    let $_ := xdmp:log(("$tr-uris", $tr-uris))
+    let $tr-array := json:to-array()
+    let $_ :=
+        for $tr-uri in $tr-uris
+        let $tr-accession-number := fn:tokenize(fn:tokenize($tr-uri, "/")[4],"\.")[1]
+        return json:array-push($tr-array, $tr-accession-number)
+    return $tr-array
+};
+
+declare function ured-model:get-pe-list($ured-accession-number) {
+    cts:value-tuples(
+        (
+            cts:field-reference("pe")
+        ),
+        (),
+        cts:and-query((
+            cts:collection-query("/citation/URED"),
+            cts:element-value-query(xs:QName("meta:AccessionNumber"), $ured-accession-number)
+        ))
+    )
+};
+
+declare function ured-model:get-ct-list($ured-accession-number) {
+    cts:value-tuples(
+        (
+            cts:field-reference("ctPunctuated")
+        ),
+        (),
+        cts:and-query((
+            cts:collection-query("/citation/URED"),
+            cts:element-value-query(xs:QName("meta:AccessionNumber"), $ured-accession-number)
+        ))
+    )
+};
+
 declare function ured-model:create-elements-array($an-links) {
     let $elements := json:to-array()
-    
+
     let $center-accession-number := map:get($an-links, "Center_Node")
     let $center-element := ured-model:create-node-element($center-accession-number, 8, $center-accession-number, "ured")
     let $_ := json:array-push($elements, $center-element)
@@ -70,6 +125,18 @@ declare function ured-model:create-elements-array($an-links) {
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
                 let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $pe, $link-accession-number)
+                return json:array-push($elements, $edge-element)
+
+    let $ct-obj-list := map:get($an-links, "CT_Links")
+    let $_ :=
+        for $ct-obj in json:array-values($ct-obj-list)
+            let $ct := map:get($ct-obj, "CT")
+            let $link-list := map:get($ct-obj, "Links")
+            for $link-accession-number in json:array-values($link-list)
+                let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number, "tr")
+                let $_ := json:array-push($elements, $node-element)
+                let $id := fn:concat($center-accession-number,"to",$link-accession-number)
+                let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $ct, $link-accession-number)
                 return json:array-push($elements, $edge-element)
 
     return $elements
@@ -95,32 +162,6 @@ declare function ured-model:create-edge-element($id, $source, $predicate, $targe
     let $element := map:map()
     let $_ := map:put($element, "data", $element-data)
     return $element
-};
-
-declare function ured-model:get-pe-list($ured-accession-number) {
-    cts:value-tuples(
-        (
-            cts:field-reference("pe")
-        ),
-        (),
-        cts:and-query((
-            cts:collection-query("/citation/URED"),
-            cts:element-value-query(xs:QName("meta:AccessionNumber"), $ured-accession-number)
-        ))
-    )
-};
-
-declare function ured-model:get-ct-list($ured-accession-number) {
-    cts:value-tuples(
-        (
-            cts:field-reference("ct")
-        ),
-        (),
-        cts:and-query((
-            cts:collection-query("/citation/URED"),
-            cts:element-value-query(xs:QName("meta:AccessionNumber"), $ured-accession-number)
-        ))
-    )
 };
 
 
