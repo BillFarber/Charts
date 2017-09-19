@@ -69,3 +69,22 @@ var cy = cytoscape({
     }
 
 });
+
+    cy.elements('.ured').qtip({
+        content: function(){ return 'URED document: ' + this.id() }
+    });
+
+    cy.elements('.r2').qtip({
+        content: function(){ return 'R2 document: ' + this.id() },
+        position: {
+            my: 'top center',
+            at: 'bottom center'
+        },
+        style: {
+            classes: 'qtip-bootstrap',
+            tip: {
+                width: 16,
+                height: 8
+            }
+        }
+    });

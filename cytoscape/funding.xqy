@@ -7,8 +7,11 @@ declare namespace meta="http://dtic.mil/mdr/record/meta";
 
 declare option xdmp:mapping "false";
 
-let $ured-accession-number := "EF000003"
-let $elements := ured-model:get-funding-elements($ured-accession-number)
+let $accession-number := "EF000003"
+let $accession-number := (xdmp:get-request-field("accessionNumber"), $accession-number)[1]
+let $_ := xdmp:log(("$accession-number",$accession-number))
+
+let $elements := ured-model:get-funding-elements($accession-number)
 let $elements-script := fn:concat("var elements = ", $elements,";")
 let $_ := xdmp:log(("$elements-script",$elements-script))
 
@@ -30,11 +33,22 @@ return
     </head>
     <body>
         <div>
-          <p>Cytoscape</p>
+          <p>Cytoscape qtip</p>
+          <div id="queryInput">
+            <form action="/cytoscape/funding.xqy">
+                Accession Number:<br></br>
+                <input type="text" name="accessionNumber" value="{$accession-number}"></input><br></br>
+                <input type="submit" value="Submit"></input>
+            </form> 
+          </div>
           <div id="cytoscape-container"></div>
           <script type="text/javascript">{$elements-script}</script>
-          <script src="/cytoscape/lib/cytoscape.js"></script>
-          <script src="/cytoscape/funding.js"></script>
+          <script src="/cytoscape/lib/jquery-3.1.1.min.js">&nbsp;</script>
+          <script src="/cytoscape/lib/cytoscape.js">&nbsp;</script>
+          <script src="/cytoscape/lib/jquery.qtip.min.js">&nbsp;</script>
+          <link href="/cytoscape/lib/jquery.qtip.min.css" rel="stylesheet" type="text/css" />
+          <script src="/cytoscape/lib/cytoscape-qtip.js">&nbsp;</script>
+          <script src="/cytoscape/funding.js">&nbsp;</script>
         </div>
     </body>
   </html>
