@@ -56,7 +56,7 @@ declare function ured-model:create-elements-array($an-links) {
     let $elements := json:to-array()
     
     let $center-accession-number := map:get($an-links, "Center_Node")
-    let $center-element := ured-model:create-node-element($center-accession-number, 8, $center-accession-number)
+    let $center-element := ured-model:create-node-element($center-accession-number, 8, $center-accession-number, "ured")
     let $_ := json:array-push($elements, $center-element)
 
     let $pe-obj-list := map:get($an-links, "PE_Links")
@@ -65,7 +65,7 @@ declare function ured-model:create-elements-array($an-links) {
             let $pe := map:get($pe-obj, "PE")
             let $link-list := map:get($pe-obj, "Links")
             for $link-accession-number in json:array-values($link-list)
-                let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number)
+                let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number, "r2")
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
                 let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $pe, $link-accession-number)
@@ -74,13 +74,14 @@ declare function ured-model:create-elements-array($an-links) {
     return $elements
 };
 
-declare function ured-model:create-node-element($id, $ring, $label) {
+declare function ured-model:create-node-element($id, $ring, $label, $classes) {
     let $element-data := map:map()
     let $_ := map:put($element-data, "id", $id)
     let $_ := map:put($element-data, "ring", $ring)
     let $_ := map:put($element-data, "label", $label)
     let $element := map:map()
     let $_ := map:put($element, "data", $element-data)
+    let $_ := map:put($element, "classes", $classes)
     return $element
 };
 
