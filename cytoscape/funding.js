@@ -3,15 +3,9 @@ var cy = cytoscape({
     container : document.getElementById('cytoscape-container'),
 
     elements : elements,
-    // [
-    // { data: { id: 'Carl', ring: 8, label: 'C' } },
-    // { data: { id: 'Phil', ring: 4, label: 'P' } },
-    // { data: { id: 'CarlChild1', source: 'Carl', predicate:'HasASon', target:
-    // 'Phil' } }
-    // ],
 
     style : [ {
-        selector : 'node',
+        selector : 'node.tr',
         style : {
             'background-color' : '#FF0000',
             'color' : '#FF0000',
@@ -37,9 +31,6 @@ var cy = cytoscape({
             'width' : 1,
             'line-color' : '#3CC',
             'color' : '#3CC',
-            'mid-target-arrow-color' : '#33C',
-            'mid-target-arrow-shape' : 'triangle',
-            'mid-target-arrow-fill' : 'filled',
             'source-label' : 'data(predicate)',
             'source-text-offset' : 100
         }
@@ -58,7 +49,8 @@ var cy = cytoscape({
     } ],
 
     layout : {
-        name : 'circle',
+        name : 'concentric',
+        minNodeSpacing: 200,
         levelWidth : function() {
             return 4;
         },
@@ -75,16 +67,9 @@ var cy = cytoscape({
     });
 
     cy.elements('.r2').qtip({
-        content: function(){ return 'R2 document: ' + this.id() },
-        position: {
-            my: 'top center',
-            at: 'bottom center'
-        },
-        style: {
-            classes: 'qtip-bootstrap',
-            tip: {
-                width: 16,
-                height: 8
-            }
-        }
+        content: function(){ return 'R2 document: ' + this.id() }
+    });
+
+    cy.elements('.tr').qtip({
+        content: function(){ return 'TR document: ' + this.id() }
     });
