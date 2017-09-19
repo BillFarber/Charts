@@ -14,7 +14,7 @@ declare function ured-model:get-funding-elements($ured-accession-number) {
 
 declare function ured-model:get-funding-elements-from-tuples($ured-accession-number) {
     let $an-links := map:map()
-    let $_ := map:put($an-links, 'center', $ured-accession-number)
+    let $_ := map:put($an-links, "Center_Node", $ured-accession-number)
 
     let $pe-tuples := ured-model:get-pe-list($ured-accession-number)
 
@@ -25,10 +25,10 @@ declare function ured-model:get-funding-elements-from-tuples($ured-accession-num
         let $r2-array := ured-model:get-r2-array-from-pe($pe)
         let $pe-links := map:map()
         let $_ := map:put($pe-links, "PE", $pe)
-        let $_ := map:put($pe-links, "List", $r2-array)
+        let $_ := map:put($pe-links, "Links", $r2-array)
         return json:array-push($pe-array, $pe-links)
 
-    let $_ := map:put($an-links, 'PEs', $pe-array)
+    let $_ := map:put($an-links, 'PE_Links', $pe-array)
     let $_ := xdmp:log(("$an-links", $an-links))
     let $elements := ured-model:create-elements-array($an-links)
     return xdmp:to-json-string($elements)
@@ -55,49 +55,44 @@ declare function ured-model:get-r2-array-from-pe($pe) {
 declare function ured-model:create-elements-array($an-links) {
     let $elements := json:to-array()
     
-    let $center-data := map:map()
-    let $accession-number := map:get($an-links, "center")
-    let $_ := map:put($center-data, "id", $accession-number)
-    let $_ := map:put($center-data, "ring", 8)
-    let $_ := map:put($center-data, "label", $accession-number)
-    let $center := map:map()
-    let $_ := map:put($center, "data", $center-data)
-    let $_ := json:array-push($elements, $center)
+    let $center-accession-number := map:get($an-links, "Center_Node")
+    let $center-element := ured-model:create-node-element($center-accession-number, 8, $center-accession-number)
+    let $_ := json:array-push($elements, $center-element)
 
-
-    let $pe-obj-list := map:get($an-links, "PEs")
-    let $pe-ct := json:array-size($pe-obj-list)
-
+    let $pe-obj-list := map:get($an-links, "PE_Links")
     let $_ :=
-        for $i in (1 to $pe-ct)
-        let $pe-obj := json:array-values($pe-obj-list)[$i]
-        let $pe := map:get($pe-obj, "PE")
-        let $rtwo-an-list := map:get($pe-obj, "List")
-        let $_ := xdmp:log(("$rtwo-an-list", $rtwo-an-list))
+        for $pe-obj in json:array-values($pe-obj-list)
+            let $pe := map:get($pe-obj, "PE")
+            let $link-list := map:get($pe-obj, "Links")
+            for $link-accession-number in json:array-values($link-list)
+                let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number)
+                let $_ := json:array-push($elements, $node-element)
+                let $id := fn:concat($center-accession-number,"to",$link-accession-number)
+                let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $pe, $link-accession-number)
+                return json:array-push($elements, $edge-element)
 
-        let $an-ct := json:array-size($rtwo-an-list)
-        for $j in (1 to $an-ct)
-        let $rtwo-an := json:array-values($rtwo-an-list)[$j]
-            
-        let $element-data := map:map()
-        let $_ := map:put($element-data, "id", $rtwo-an)
-        let $_ := map:put($element-data, "ring", 4)
-        let $_ := map:put($element-data, "label", $rtwo-an)
-        let $element := map:map()
-        let $_ := map:put($element, "data", $element-data)
-        let $_ := json:array-push($elements, $element)
-            
-        let $element-data := map:map()
-        let $id := fn:concat($accession-number,"to",$rtwo-an)
-        let $_ := map:put($element-data, "id", $id)
-        let $_ := map:put($element-data, "source", $accession-number)
-        let $_ := map:put($element-data, "predicate", $pe)
-        let $_ := map:put($element-data, "target", $rtwo-an)
-        let $element := map:map()
-        let $_ := map:put($element, "data", $element-data)
-        return json:array-push($elements, $element)
-    
     return $elements
+};
+
+declare function ured-model:create-node-element($id, $ring, $label) {
+    let $element-data := map:map()
+    let $_ := map:put($element-data, "id", $id)
+    let $_ := map:put($element-data, "ring", $ring)
+    let $_ := map:put($element-data, "label", $label)
+    let $element := map:map()
+    let $_ := map:put($element, "data", $element-data)
+    return $element
+};
+
+declare function ured-model:create-edge-element($id, $source, $predicate, $target) {
+    let $element-data := map:map()
+    let $_ := map:put($element-data, "id", $id)
+    let $_ := map:put($element-data, "source", $source)
+    let $_ := map:put($element-data, "predicate", $predicate)
+    let $_ := map:put($element-data, "target", $target)
+    let $element := map:map()
+    let $_ := map:put($element, "data", $element-data)
+    return $element
 };
 
 declare function ured-model:get-pe-list($ured-accession-number) {
