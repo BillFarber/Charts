@@ -119,7 +119,7 @@
     "range-field-index": [
                 {
                     "scalar-type": "string",
-                    "field-name": "ct",
+                    "field-name": "ctPunctuated",
                     "collation": "http://marklogic.com/collation/",
                     "range-value-positions": false,
                     "invalid-values": "ignore"
