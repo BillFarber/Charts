@@ -42,24 +42,18 @@
     ],
     "field": [
                 {
-                    "field-name": "ct",
+                    "field-name": "ctPunctuated",
                     "field-path": [
                         {
-                            "path": "//meta:ContractNumbers",
+                            "path": "//meta:ContractNumbers/meta:*/meta:Punctuated",
                             "weight": 1.0
                         },
                         {
-                            "path": "//meta:ContractNumber",
+                            "path": "//meta:ContractNumber/meta:Punctuated",
                             "weight": 1.0
-                        },
-                        {
-                            "path": "//meta:LocalControlNumber",
-                            "weight": 1.0
-                        },
-                        {
-                            "path": "//meta:TransferNumber",
-                            "weight": 1.0
-                        }                    ]
+                        }
+                    ],
+                    "field-value-searches": true
                 },
                 {
                     "field-name": "pe",
