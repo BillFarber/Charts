@@ -102,4 +102,6 @@ var cy = cytoscape({
     
     cy.$('.ured, .tr, .r2').on('tap', function(evt){
         console.log( 'tap '+ JSON.stringify(this._private.data) );
-      });
+        var targetId = this.id();
+        window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
+    });
