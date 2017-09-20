@@ -168,8 +168,17 @@ declare function ured-model:create-edge-element($id, $source, $predicate, $targe
 declare function ured-model:get-ured-tip-content($ured-accession-number) {
     let $uri := fn:concat("/citation/URED/",$ured-accession-number,".xml")
     let $doc := fn:doc($uri)
+    let $collection := xs:string($doc/mdr:Record/meta:Metadata/meta:Collections/meta:Collection[1])
     let $title := xs:string($doc/mdr:Record/meta:Metadata/meta:Title)
-    let $tip := $title
+    let $creation-date := xs:string($doc/mdr:Record/meta:Metadata/meta:CitationCreationDate)
+    let $objective := xs:string($doc/mdr:Record/meta:Metadata/meta:Objective)
+    let $tip := fn:concat('<div>',
+        '<b>Collection:</b>',$collection,
+        '<br><b>Title:</b>',$title,
+        '<br><b>Creation Date:</b>',$creation-date,
+        '<br><b>Objective:</b>',$objective,
+        '</div>'
+    )
     return $tip
 };
 

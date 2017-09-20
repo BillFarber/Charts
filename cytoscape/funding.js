@@ -69,7 +69,10 @@ var cy = cytoscape({
         content: {
             text: function(){
                 var tip = this._private.data.tip;
-                return $('<div><u>'+tip+'</u></div>');
+                console.log("tip:"+tip);
+                var parsed = $('<div/>').html(tip).text();;
+                console.log("parsed:"+JSON.stringify(parsed));
+                return parsed;
             }
         }
     });
