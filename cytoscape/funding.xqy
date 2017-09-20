@@ -1,17 +1,27 @@
 xquery version "1.0-ml";
 
-import module namespace ured-model = "http://org.billFarber.marklogic/charts/ured" at "/models/ured-model.xqy";
+import module namespace charts-model = "http://org.billFarber.marklogic/charts"      at "/models/charts-model.xqy";
+import module namespace r2-model     = "http://org.billFarber.marklogic/charts/r2"   at "/models/r2-model.xqy";
+import module namespace ured-model   = "http://org.billFarber.marklogic/charts/ured" at "/models/ured-model.xqy";
 
-declare namespace mdr="http://dtic.mil/mdr/record";
-declare namespace meta="http://dtic.mil/mdr/record/meta";
+declare namespace mdr  = "http://dtic.mil/mdr/record";
+declare namespace meta = "http://dtic.mil/mdr/record/meta";
 
 declare option xdmp:mapping "false";
 
 let $accession-number := "EF000003"
 let $accession-number := (xdmp:get-request-field("accessionNumber"), $accession-number)[1]
 let $_ := xdmp:log(("$accession-number",$accession-number))
+let $collection := charts-model:get-collection-from-accession-number($accession-number)
+let $_ := xdmp:log(("$collection",$collection))
 
-let $elements := ured-model:get-funding-elements($accession-number)
+let $elements := 
+        switch ($collection) 
+            case "TR"   return charts-model:empty-elements-list()
+            case "URED" return ured-model:get-funding-elements($accession-number)
+            case "R2"   return r2-model:get-funding-elements($accession-number)
+            default     return charts-model:empty-elements-list()
+
 let $elements-script := fn:concat("var elements = ", $elements,";")
 let $_ := xdmp:log(("$elements-script",$elements-script))
 
