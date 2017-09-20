@@ -58,7 +58,6 @@ var cy = cytoscape({
             return 4;
         },
         concentric : function(node) {
-            console.log(node._private.data.ring);
             return node._private.data.ring;
         }
     }
@@ -69,9 +68,7 @@ var cy = cytoscape({
         content: {
             text: function(){
                 var tip = this._private.data.tip;
-                console.log("tip:"+tip);
                 var parsed = $('<div/>').html(tip).text();;
-                console.log("parsed:"+JSON.stringify(parsed));
                 return parsed;
             }
         },
@@ -102,3 +99,7 @@ var cy = cytoscape({
             event: 'mouseout'
         }
     });
+    
+    cy.$('.ured, .tr, .r2').on('tap', function(evt){
+        console.log( 'tap '+ JSON.stringify(this._private.data) );
+      });
