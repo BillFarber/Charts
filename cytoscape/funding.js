@@ -81,7 +81,13 @@ var cy = cytoscape({
     });
 
     cy.elements('.r2').qtip({
-        content: function(){ return 'R2 document: ' + this.id() },
+        content: {
+            text: function(){
+                var tip = this._private.data.tip;
+                var parsed = $('<div/>').html(tip).text();;
+                return parsed;
+            }
+        },
         show: {
             event: 'mouseover'
         },
@@ -91,7 +97,13 @@ var cy = cytoscape({
     });
 
     cy.elements('.tr').qtip({
-        content: function(){ return 'TR document: ' + this.id() },
+        content: {
+            text: function(){
+                var tip = this._private.data.tip;
+                var parsed = $('<div/>').html(tip).text();;
+                return parsed;
+            }
+        },
         show: {
             event: 'mouseover'
         },
@@ -99,7 +111,7 @@ var cy = cytoscape({
             event: 'mouseout'
         }
     });
-    
+
     cy.$('.ured, .tr, .r2').on('tap', function(evt){
         console.log( 'tap '+ JSON.stringify(this._private.data) );
         var targetId = this.id();

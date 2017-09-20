@@ -2,6 +2,8 @@ xquery version "1.0-ml";
 
 module namespace r2-model = "http://org.billFarber.marklogic/charts/r2";
 
+import module namespace ured-model   = "http://org.billFarber.marklogic/charts/ured" at "/models/ured-model.xqy";
+
 declare namespace mdr  = "http://dtic.mil/mdr/record";
 declare namespace meta = "http://dtic.mil/mdr/record/meta";
 declare namespace r2   = "http://www.dtic.mil/comptroller/xml/schema/022009/r2";
@@ -79,7 +81,8 @@ declare function r2-model:create-elements-array($an-links) {
             let $pe := map:get($pe-obj, "PE")
             let $link-list := map:get($pe-obj, "Links")
             for $link-accession-number in json:array-values($link-list)
-                let $node-element := r2-model:create-node-element($link-accession-number, 4, $link-accession-number, "ured", ())
+                let $tip-content := ured-model:get-tip-content($link-accession-number)
+                let $node-element := r2-model:create-node-element($link-accession-number, 4, $link-accession-number, "ured", $tip-content)
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
                 let $edge-element := r2-model:create-edge-element($id, $center-accession-number, $pe, $link-accession-number, "pe")
@@ -116,14 +119,14 @@ declare function r2-model:get-tip-content($accession-number) {
     let $uri := fn:concat("/citation/R2/",$accession-number,".xml")
     let $doc := fn:doc($uri)
     let $collection := xs:string($doc/mdr:Record/meta:Metadata/meta:Collections/meta:Collection[1])
-    let $title := xs:string($doc/mdr:Record/meta:Metadata/meta:Title)
     let $creation-date := xs:string($doc/mdr:Record/meta:Metadata/meta:CitationCreationDate)
-    let $objective := xs:string($doc/mdr:Record/meta:Metadata/meta:Objective)
+    let $title := xs:string($doc/mdr:Record/r2:ProgramElementList/r2:ProgramElement/r2:ProgramElementTitle[1])
+    let $budget-year := xs:string($doc/mdr:Record/r2:ProgramElementList/r2:ProgramElement/r2:BudgetYear[1])
     let $tip := fn:concat('<div>',
         '<b>Collection:</b>',$collection,
-        '<br><b>Title:</b>',$title,
         '<br><b>Creation Date:</b>',$creation-date,
-        '<br><b>Objective:</b>',$objective,
+        '<br><b>Title:</b>',$title,
+        '<br><b>Budget Year:</b>',$budget-year,
         '</div>'
     )
     return $tip
