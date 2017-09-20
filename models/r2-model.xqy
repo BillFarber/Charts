@@ -118,10 +118,10 @@ declare function r2-model:create-edge-element($id, $source, $predicate, $target,
 declare function r2-model:get-tip-content($accession-number) {
     let $uri := fn:concat("/citation/R2/",$accession-number,".xml")
     let $doc := fn:doc($uri)
-    let $collection := xs:string($doc/mdr:Record/meta:Metadata/meta:Collections/meta:Collection[1])
+    let $collection := xs:string($doc/mdr:Record/meta:Metadata/meta:Collections/meta:Collection)[1]
     let $creation-date := xs:string($doc/mdr:Record/meta:Metadata/meta:CitationCreationDate)
-    let $title := xs:string($doc/mdr:Record/r2:ProgramElementList/r2:ProgramElement/r2:ProgramElementTitle[1])
-    let $budget-year := xs:string($doc/mdr:Record/r2:ProgramElementList/r2:ProgramElement/r2:BudgetYear[1])
+    let $title := xs:string($doc/mdr:Record/r2:ProgramElementList/r2:ProgramElement/r2:ProgramElementTitle)[1]
+    let $budget-year := xs:string($doc/mdr:Record/r2:ProgramElementList/r2:ProgramElement/r2:BudgetYear)[1]
     let $tip := fn:concat('<div>',
         '<b>Collection:</b>',$collection,
         '<br><b>Creation Date:</b>',$creation-date,

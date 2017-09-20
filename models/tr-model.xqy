@@ -119,7 +119,7 @@ declare function tr-model:create-edge-element($id, $source, $predicate, $target,
 declare function tr-model:get-tip-content($accession-number) {
     let $uri := fn:concat("/citation/TR/",$accession-number,".xml")
     let $doc := fn:doc($uri)
-    let $collection := xs:string($doc/mdr:Record/meta:Metadata/meta:Collections/meta:Collection[1])
+    let $collection := xs:string($doc/mdr:Record/meta:Metadata/meta:Collections/meta:Collection)[1]
     let $title := xs:string($doc/mdr:Record/meta:Metadata/meta:Title)
     let $creation-date := xs:string($doc/mdr:Record/meta:Metadata/meta:CitationCreationDate)
     let $objective := xs:string($doc/mdr:Record/meta:Metadata/meta:Objective)
