@@ -74,13 +74,31 @@ var cy = cytoscape({
                 console.log("parsed:"+JSON.stringify(parsed));
                 return parsed;
             }
+        },
+        show: {
+            event: 'mouseover'
+        },
+        hide: {
+            event: 'mouseout'
         }
     });
 
     cy.elements('.r2').qtip({
-        content: function(){ return 'R2 document: ' + this.id() }
+        content: function(){ return 'R2 document: ' + this.id() },
+        show: {
+            event: 'mouseover'
+        },
+        hide: {
+            event: 'mouseout'
+        }
     });
 
     cy.elements('.tr').qtip({
-        content: function(){ return 'TR document: ' + this.id() }
+        content: function(){ return 'TR document: ' + this.id() },
+        show: {
+            event: 'mouseover'
+        },
+        hide: {
+            event: 'mouseout'
+        }
     });
