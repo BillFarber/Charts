@@ -3,6 +3,7 @@ xquery version "1.0-ml";
 module namespace ured-model = "http://org.billFarber.marklogic/charts/ured";
 
 import module namespace r2-model     = "http://org.billFarber.marklogic/charts/r2"   at "/models/r2-model.xqy";
+import module namespace tr-model     = "http://org.billFarber.marklogic/charts/tr"   at "/models/tr-model.xqy";
 
 declare namespace mdr  = "http://dtic.mil/mdr/record";
 declare namespace meta = "http://dtic.mil/mdr/record/meta";
@@ -135,7 +136,8 @@ declare function ured-model:create-elements-array($an-links) {
             let $ct := map:get($ct-obj, "CT")
             let $link-list := map:get($ct-obj, "Links")
             for $link-accession-number in json:array-values($link-list)
-                let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number, "tr", ())
+                let $tip-content := tr-model:get-tip-content($link-accession-number)
+                let $node-element := ured-model:create-node-element($link-accession-number, 4, $link-accession-number, "tr", $tip-content)
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
                 let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $ct, $link-accession-number, "ct")
