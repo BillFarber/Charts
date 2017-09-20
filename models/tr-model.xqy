@@ -120,14 +120,14 @@ declare function tr-model:get-tip-content($accession-number) {
     let $uri := fn:concat("/citation/TR/",$accession-number,".xml")
     let $doc := fn:doc($uri)
     let $collection := xs:string($doc/mdr:Record/meta:Metadata/meta:Collections/meta:Collection)[1]
-    let $title := xs:string($doc/mdr:Record/meta:Metadata/meta:Title)
+    let $title := xs:string($doc/mdr:Record/meta:Metadata/meta:UnclassifiedTitle)
     let $creation-date := xs:string($doc/mdr:Record/meta:Metadata/meta:CitationCreationDate)
-    let $objective := xs:string($doc/mdr:Record/meta:Metadata/meta:Objective)
+    let $abstract := xs:string($doc/mdr:Record/meta:Metadata/meta:Abstract)
     let $tip := fn:concat('<div>',
         '<b>Collection:</b>',$collection,
         '<br><b>Title:</b>',$title,
         '<br><b>Creation Date:</b>',$creation-date,
-        '<br><b>Objective:</b>',$objective,
+        '<br><b>Abstract:</b>',$abstract,
         '</div>'
     )
     return $tip
