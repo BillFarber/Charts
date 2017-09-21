@@ -35,8 +35,8 @@ return
       <title>Cytoscape Network Visualization</title>
       <style type="text/css">{'
         #cytoscape-container {
-            max-width: 800px;
-            height: 700px;
+            max-width: 700px;
+            height: 600px;
             margin: auto;
         }
       '}</style>

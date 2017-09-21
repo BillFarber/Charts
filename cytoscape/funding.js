@@ -114,6 +114,24 @@ var cy = cytoscape({
 
     cy.$('.ured, .tr, .r2').on('tap', function(evt){
         console.log( 'tap '+ JSON.stringify(this._private.data) );
-        var targetId = this.id();
-        window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
+        insertNewElements(this);
+
+//        this.remove();
+
+//        var targetId = this.id();
+//        window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
     });
+
+insertNewElements = function(parentNode) {
+    var newElements = getNewElements(parentNode);
+    cy.add(newElements);
+}
+
+getNewElements = function(parentNode) {
+    var newDocId = "NewDoc";
+    var edgeId = parentNode.id() + "To" + newDocId;
+    return [
+            { group: 'nodes', data: { id: newDocId, ring: 16, label: newDocId } },
+            { group: 'edges', data: { id: edgeId, source: parentNode.id(), predicate:'relates', target: newDocId } }
+        ];
+}
