@@ -55,6 +55,13 @@ statePopup = function(stateCode) {
             },
             dataLabels: {
                 format: '<b>{point.name}</b> {point.percentage:.1f}%'
+            },
+            point : {
+                events : {
+                    click : function(e) {
+                        window.location.href = "/highcharts/state-organization-table.xqy?state=UT&organization=DefenseIndustrialComplex";
+                    }
+                }
             }
         }]
     });
