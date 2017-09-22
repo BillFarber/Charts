@@ -59,7 +59,9 @@ statePopup = function(stateCode) {
             point : {
                 events : {
                     click : function(e) {
-                        window.location.href = "/highcharts/state-organization-table.xqy?state=UT&organization=DefenseIndustrialComplex";
+                        var state = stateCode;
+                        var organization = this.name;
+                        window.location.href = "/highcharts/state-organization-table.xqy?state="+state+"&organization="+organization;
                     }
                 }
             }
