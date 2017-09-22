@@ -48,7 +48,7 @@ declare function r2-model:get-ured-array-from-pe($pe) {
     )
     let $r-array := json:to-array()
     let $_ :=
-        for $ured-uri in $ured-uris
+        for $ured-uri in $ured-uris[1 to 10]
         let $ured-accession-number := fn:tokenize(fn:tokenize($ured-uri, "/")[4],"\.")[1]
         return json:array-push($r-array, $ured-accession-number)
     return $r-array

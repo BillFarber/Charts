@@ -60,7 +60,7 @@ declare function ured-model:get-r2-array-from-pe($pe) {
     )
     let $r-array := json:to-array()
     let $_ :=
-        for $r2-uri in $r2-uris
+        for $r2-uri in $r2-uris[1 to 10]
         let $r2-accession-number := fn:tokenize(fn:tokenize($r2-uri, "/")[4],"\.")[1]
         return json:array-push($r-array, $r2-accession-number)
     return $r-array
@@ -77,7 +77,7 @@ declare function ured-model:get-tr-array-from-ct($ct) {
     )
     let $tr-array := json:to-array()
     let $_ :=
-        for $tr-uri in $tr-uris
+        for $tr-uri in $tr-uris[1 to 10]
         let $tr-accession-number := fn:tokenize(fn:tokenize($tr-uri, "/")[4],"\.")[1]
         return json:array-push($tr-array, $tr-accession-number)
     return $tr-array

@@ -14,8 +14,8 @@ var cy = cytoscape({
     }, {
         selector : 'node.ured',
         style : {
-            'background-color' : '#00FF00',
-            'color' : '#00FF00',
+            'background-color' : '#009900',
+            'color' : '#009900',
             'label' : 'data(label)'
         }
     }, {
@@ -53,9 +53,9 @@ var cy = cytoscape({
 
     layout : {
         name : 'concentric',
-        minNodeSpacing: 200,
+        minNodeSpacing: 50,
         levelWidth : function() {
-            return 4;
+            return 3;
         },
         concentric : function(node) {
             return node._private.data.ring;
@@ -113,12 +113,12 @@ var cy = cytoscape({
     });
 
     cy.$('.ured, .tr, .r2').on('tap', function(evt){
-        insertNewElements(this);
+//        insertNewElements(this);
 
 //        this.remove();
 
-//        var targetId = this.id();
-//        window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
+        var targetId = this.id();
+        window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
     });
 
 insertNewElements = function(parentNode) {

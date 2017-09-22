@@ -47,7 +47,7 @@ declare function tr-model:get-ured-array-from-ct($ct) {
     )
     let $ured-array := json:to-array()
     let $_ :=
-        for $ured-uri in $ured-uris
+        for $ured-uri in $ured-uris[1 to 10]
         let $ured-accession-number := fn:tokenize(fn:tokenize($ured-uri, "/")[4],"\.")[1]
         return json:array-push($ured-array, $ured-accession-number)
     return $ured-array
