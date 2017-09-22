@@ -87,7 +87,8 @@
                             "path": "//meta:PerformingOrganization/meta:CageCodeOrganization/meta:CompanyName",
                             "weight": 1.0
                         }
-                    ]
+                    ],
+                    "field-value-searches": true
                 },
                 {
                     "field-name": "pst",
@@ -104,7 +105,8 @@
                             "path": "//meta:PerformingOrganization/meta:State",
                             "weight": 1.0
                         }
-                    ]
+                    ],
+                    "field-value-searches": true
                 },
                 {
                     "field-name": "totaldodfunding",
