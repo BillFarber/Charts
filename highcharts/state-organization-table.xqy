@@ -12,8 +12,8 @@ let $_ := xdmp:log(("$state",$state))
 let $_ := xdmp:log(("$organization",$organization))
 let $_ := xdmp:log(("$query-text",$query-text))
 
-let $ured-uris := ured-model:get-funding-for-state-and-organization($state, $organization, $query-text)
-let $_ := xdmp:log(("$ured-uris",$ured-uris))
+let $uris := ured-model:get-funding-for-state-and-organization($state, $organization, $query-text)
+let $_ := xdmp:log(("$uris",$uris))
 
 let $_ := xdmp:set-response-content-type('text/html')
 return (
@@ -23,10 +23,15 @@ return (
         <head>
         </head>
         <body>
-            <table>
-                <tr><td>A0</td><td>A1</td></tr>
-                <tr><td>B0</td><td>B1</td></tr>
-                <tr><td>C0</td><td>C1</td></tr>
+            <table border="1">
+            {
+                for $uri in $uris
+                let $doc := fn:doc($uri)
+                let $an := xs:string($doc/mdr:Record/meta:Metadata/meta:AccessionNumber)
+                let $title := xs:string($doc/mdr:Record/meta:Metadata/meta:Title)
+                let $link := fn:concat("/cytoscape/funding.xqy?accessionNumber=",$an)
+                return <tr><td><a href="{$link}">{$an}</a></td><td>{$title}</td></tr>
+            }
             </table>
         </body>
     </html>
