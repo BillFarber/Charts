@@ -191,6 +191,32 @@ declare function ured-model:get-tip-content($ured-accession-number) {
 
 
 
+declare function ured-model:get-funding-for-state-and-organization($state-code, $performingOrganization, $query-text) {
+    ured-model:get-state-and-organization-funding-from-tuples($state-code, $performingOrganization, $query-text)
+};
+
+declare function ured-model:get-state-and-organization-funding-from-tuples($state-code, $performingOrganization, $query-text) {
+    let $word-query :=
+        if ($query-text) then
+            cts:word-query($query-text)
+        else ()
+    return
+        cts:uris(
+            (),
+            (),
+            cts:and-query((
+                cts:collection-query("/citation/URED"),
+                cts:field-value-query("pst", $state-code),
+                cts:field-value-query("poa", $performingOrganization),
+                $word-query
+            ))
+        )
+};
+
+
+
+
+
 
 
 declare function ured-model:get-funding($query-text) {
