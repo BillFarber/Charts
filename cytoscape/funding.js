@@ -113,7 +113,6 @@ var cy = cytoscape({
     });
 
     cy.$('.ured, .tr, .r2').on('tap', function(evt){
-        console.log( 'tap '+ JSON.stringify(this._private.data) );
         insertNewElements(this);
 
 //        this.remove();
@@ -123,15 +122,23 @@ var cy = cytoscape({
     });
 
 insertNewElements = function(parentNode) {
-    var newElements = getNewElements(parentNode);
-    cy.add(newElements);
+    var newElements = getNewElementsAjax(parentNode);
+}
+
+
+getNewElementsAjax = function(parentNode) {
+    console.log("ajax");
+    $.ajax({
+        url: "/cytoscape/ajax/getMoreNodes.xqy",
+        context: document.body
+      }).done(function(data) {
+        console.log("done: " + JSON.stringify(data));
+        cy.add(data);
+      });
 }
 
 getNewElements = function(parentNode) {
     var newDocId = "NewDoc";
     var edgeId = parentNode.id() + "To" + newDocId;
-    return [
-            { group: 'nodes', data: { id: newDocId, ring: 16, label: newDocId } },
-            { group: 'edges', data: { id: edgeId, source: parentNode.id(), predicate:'relates', target: newDocId } }
-        ];
+    return [{"classes":"tr","data":{"ring":16,"tip":"New node tooltip","label":"AB123456","id":"AB123456"}},{"classes":"ct","data":{"predicate":"xxxx","target":"AB123456","source":"AD000043","id":"AD000043toAB123456"}}];
 }
