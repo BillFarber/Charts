@@ -191,6 +191,8 @@ declare function ured-model:get-tip-content($ured-accession-number) {
 
 
 
+
+
 declare function ured-model:get-funding-for-state-and-organization($state-code, $performingOrganization, $query-text) {
     ured-model:get-state-and-organization-funding-from-tuples($state-code, $performingOrganization, $query-text)
 };

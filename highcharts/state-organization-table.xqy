@@ -15,23 +15,38 @@ let $_ := xdmp:log(("$query-text",$query-text))
 let $uris := ured-model:get-funding-for-state-and-organization($state, $organization, $query-text)
 let $_ := xdmp:log(("$uris",$uris))
 
+let $table-title := fn:concat("URED Records for ", $organization, " in ", $state)
+
 let $_ := xdmp:set-response-content-type('text/html')
 return (
     text{ '<!DOCTYPE html>' },
     <html>
         <title>URED Funding by State/Organization</title>
         <head>
+            <style type="text/css">{'
+                tr:nth-child(even) {
+                    background-color: #c5c5c5;
+                }
+                tr:nth-child(odd) {
+                    background-color: #e6e6e6;
+                }
+            '}</style>
         </head>
         <body>
-            <table border="1">
-            {
-                for $uri in $uris
-                let $doc := fn:doc($uri)
-                let $an := xs:string($doc/mdr:Record/meta:Metadata/meta:AccessionNumber)
-                let $title := xs:string($doc/mdr:Record/meta:Metadata/meta:Title)
-                let $link := fn:concat("/cytoscape/funding.xqy?accessionNumber=",$an)
-                return <tr><td><a href="{$link}">{$an}</a></td><td>{$title}</td></tr>
-            }
+             <div><b><u>{$table-title}</u></b></div>
+            <br></br>
+            <table>
+                <tr><th>Accession Number</th><th>Title</th><th>Creation Date</th><th>Objective</th></tr>
+                {
+                    for $uri in $uris
+                    let $doc := fn:doc($uri)
+                    let $an := xs:string($doc/mdr:Record/meta:Metadata/meta:AccessionNumber)
+                    let $title := xs:string($doc/mdr:Record/meta:Metadata/meta:Title)
+                    let $creation-date := xs:string($doc/mdr:Record/meta:Metadata/meta:CitationCreationDate)
+                    let $objective := xs:string($doc/mdr:Record/meta:Metadata/meta:Objective)
+                    let $link := fn:concat("/cytoscape/funding.xqy?accessionNumber=",$an)
+                    return <tr class='clickable-row' data-href='{$link}'><td><a href="{$link}">{$an}</a></td><td>{$title}</td><td>{$creation-date}</td><td>{$objective}</td></tr>
+                }
             </table>
         </body>
     </html>
