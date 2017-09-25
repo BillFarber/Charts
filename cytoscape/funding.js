@@ -1,3 +1,26 @@
+setToolTips = function() {
+    cy.elements('node').qtip({
+        content: {
+            text: function(){
+                var tip = this._private.data.tip;
+                console.log("tip:"+tip);
+                var parsed = tip;
+                if (tip.startsWith("&lt;")) {
+                    parsed = $('<div/>').html(tip).text();
+                }
+                console.log("parsed:"+parsed);
+                return parsed;
+            }
+        },
+        show: {
+            event: 'mouseover'
+        },
+        hide: {
+            event: 'mouseout'
+        }
+    });
+}
+
 var cy = cytoscape({
 
     container : document.getElementById('cytoscape-container'),
@@ -64,81 +87,33 @@ var cy = cytoscape({
 
 });
 
-    cy.elements('.ured').qtip({
-        content: {
-            text: function(){
-                var tip = this._private.data.tip;
-                var parsed = $('<div/>').html(tip).text();;
-                return parsed;
-            }
-        },
-        show: {
-            event: 'mouseover'
-        },
-        hide: {
-            event: 'mouseout'
-        }
-    });
 
-    cy.elements('.r2').qtip({
-        content: {
-            text: function(){
-                var tip = this._private.data.tip;
-                var parsed = $('<div/>').html(tip).text();;
-                return parsed;
-            }
-        },
-        show: {
-            event: 'mouseover'
-        },
-        hide: {
-            event: 'mouseout'
-        }
-    });
-
-    cy.elements('.tr').qtip({
-        content: {
-            text: function(){
-                var tip = this._private.data.tip;
-                var parsed = $('<div/>').html(tip).text();;
-                return parsed;
-            }
-        },
-        show: {
-            event: 'mouseover'
-        },
-        hide: {
-            event: 'mouseout'
-        }
-    });
-
-    cy.$('.ured, .tr, .r2').on('tap', function(evt){
-//        insertNewElements(this);
+cy.$('.ured, .tr, .r2').on('tap', function(evt){
+        insertNewElements(this);
 
 //        this.remove();
 
-        var targetId = this.id();
-        window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
-    });
+//        var targetId = this.id();
+//        window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
+});
+
+
+setToolTips();
 
 insertNewElements = function(parentNode) {
     var newElements = getNewElementsAjax(parentNode);
 }
 
-
 getNewElementsAjax = function(parentNode) {
     console.log("ajax");
+    var url = "/cytoscape/ajax/getMoreNodes.xqy?accessionNumber="+parentNode.id();
+    console.log("url: " + url);
     $.ajax({
-        url: "/cytoscape/ajax/getMoreNodes.xqy",
+        url: url,
         context: document.body
-      }).done(function(data) {
+    }).done(function(data) {
         console.log("done: " + JSON.stringify(data));
         cy.add(data);
-      });
-}
-
-getNewElements = function(parentNode) {
-    var newDocId = "NewDoc";
-    var edgeId = parentNode.id() + "To" + newDocId;
-    return [{"classes":"tr","data":{"ring":16,"tip":"New node tooltip","label":"AB123456","id":"AB123456"}},{"classes":"ct","data":{"predicate":"xxxx","target":"AB123456","source":"AD000043","id":"AD000043toAB123456"}}];
+        setToolTips();
+    });
 }
