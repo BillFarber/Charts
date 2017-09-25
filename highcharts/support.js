@@ -28,7 +28,7 @@ seriesData = function(stateCode) {
     return data;
 };
 
-statePopup = function(stateCode) {
+statePopup = function(selectedYear, stateCode) {
     var $div = $('<div></div>')
         .dialog({
             title: this.name,
@@ -61,7 +61,7 @@ statePopup = function(stateCode) {
                     click : function(e) {
                         var state = stateCode;
                         var organization = this.name;
-                        window.location.href = "/highcharts/state-organization-table.xqy?state="+state+"&organization="+organization;
+                        window.location.href = "/highcharts/state-organization-table.xqy?state="+state+"&organization="+organization+"&year="+selectedYear;
                     }
                 }
             }

@@ -11,7 +11,7 @@ let $selected-year := (xdmp:get-request-field("year"), $selected-year)[1]
 let $year-options := (2010 to 2017)
 
 let $funding := ured-model:get-funding($query-text, $selected-year)
-let $draw-script := fn:concat("var stateData = ", $funding[1],"; var funding = ", $funding[2], "; var minStateFunding = ", $funding[3], "; var maxStateFunding = ", $funding[4], ";")
+let $draw-script := fn:concat("var stateData = ", $funding[1],"; var funding = ", $funding[2], "; var minStateFunding = ", $funding[3], "; var maxStateFunding = ", $funding[4], ";", " var selectedYear = ", $selected-year, ";")
 
 let $_ := xdmp:set-response-content-type('text/html')
 return (
@@ -31,7 +31,7 @@ return (
             <script src='/highcharts/highchartsStateChoropleth.js'>&nbsp;</script>
         </head>
         <body>
-            <div id="queryInput">
+            <div id="queryInput" style="float:left;">
                  <form action="/highcharts/highchartsSampleChoropleth.xqy">
                     {
                         for $year in $year-options
