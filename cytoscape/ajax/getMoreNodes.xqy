@@ -17,7 +17,6 @@ let $elements :=
             case "URED" return ured-model:get-funding-elements($accession-number, 2)
             case "R2"   return r2-model:get-funding-elements($accession-number, 2)
             default     return charts-model:empty-elements-list()
-let $_ := xdmp:log(("$elements",$elements))
 
 let $_ := xdmp:set-response-content-type('application/json')
 return $elements

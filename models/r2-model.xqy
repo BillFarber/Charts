@@ -32,7 +32,6 @@ declare function r2-model:get-funding-elements-from-tuples($accession-number, $d
 
     let $_ := map:put($an-links, 'PE_Links', $pe-array)
     let $_ := map:put($an-links, 'CT_Links', $ct-array)
-    let $_ := xdmp:log(("$an-links", $an-links))
     let $elements := r2-model:create-elements-array($an-links, $divider)
     return xdmp:to-json-string($elements)
 };

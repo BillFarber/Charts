@@ -44,7 +44,6 @@ declare function ured-model:get-funding-elements-from-tuples($ured-accession-num
 
     let $_ := map:put($an-links, 'PE_Links', $pe-array)
     let $_ := map:put($an-links, 'CT_Links', $ct-array)
-    let $_ := xdmp:log(("$an-links", $an-links))
     let $elements := ured-model:create-elements-array($an-links, $divider)
     return xdmp:to-json-string($elements)
 };
@@ -226,7 +225,6 @@ declare function ured-model:get-funding($query-text) {
 };
 
 declare function ured-model:get-complex-funding-from-tuples($query-text) {
-    let $_ := xdmp:log("TUPLES")
     let $tuples := ured-model:get-matching-tuples($query-text)
 
     let $state-funding-by-organization := map:map()
@@ -305,7 +303,6 @@ declare function ured-model:get-matching-tuples($query-text) {
 };
 
 declare function ured-model:get-complex-funding-from-docs() {
-    let $_ := xdmp:log("DOCS")
     let $docs := ured-model:get-matching-documents()
 
     let $state-funding-by-organization := map:map()
