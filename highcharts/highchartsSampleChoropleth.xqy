@@ -22,15 +22,15 @@ return (
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">&nbsp;</script>
             <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js">&nbsp;</script>
 
-            <script src="https://code.highcharts.com/highcharts.js">&nbsp;</script>
-            <script src="https://code.highcharts.com/maps/modules/map.js">&nbsp;</script>
+            <script src="/highcharts/highcharts.js">&nbsp;</script>
+            <script src="/highcharts/map.js">&nbsp;</script>
             <script src='/highcharts/js/us-all.js'>&nbsp;</script>
 
             <script src='/highcharts/support.js'>&nbsp;</script>
             <script type="text/javascript">{$draw-script}</script>
-            <script src='/highcharts/highchartsStateChoropleth.js'>&nbsp;</script>
         </head>
         <body>
+            <script src='/highcharts/highchartsStateChoropleth.js'>&nbsp;</script>
             <div id="queryInput" style="float:left;">
                  <form action="/highcharts/highchartsSampleChoropleth.xqy">
                     {
