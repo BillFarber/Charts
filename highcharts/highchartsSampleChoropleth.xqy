@@ -8,9 +8,9 @@ declare namespace meta="http://dtic.mil/mdr/record/meta";
 let $query-text := xdmp:get-request-field("queryText")
 let $selected-year := "2017"
 let $selected-year := (xdmp:get-request-field("year"), $selected-year)[1]
-let $year-options := ("2017", "2016", "2015", "2014", "2013", "2012")
+let $year-options := (2010 to 2017)
 
-let $funding := ured-model:get-funding($query-text)
+let $funding := ured-model:get-funding($query-text, $selected-year)
 let $draw-script := fn:concat("var stateData = ", $funding[1],"; var funding = ", $funding[2], "; var minStateFunding = ", $funding[3], "; var maxStateFunding = ", $funding[4], ";")
 
 let $_ := xdmp:set-response-content-type('text/html')
@@ -36,7 +36,7 @@ return (
                     {
                         for $year in $year-options
                         return
-                            if ($year eq $selected-year) then
+                            if ($year eq xs:integer($selected-year)) then
                                 <div><input type="radio" name="year" value="{$year}" checked="checked" > {$year}</input></div>
                             else
                                 <div><input type="radio" name="year" value="{$year}" > {$year}</input></div>
