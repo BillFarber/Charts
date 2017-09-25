@@ -22,6 +22,9 @@ return (
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">&nbsp;</script>
             <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js">&nbsp;</script>
 
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" type="text/css" />
+
             <script src="/highcharts/highcharts.js">&nbsp;</script>
             <script src="/highcharts/map.js">&nbsp;</script>
             <script src='/highcharts/js/us-all.js'>&nbsp;</script>
@@ -47,7 +50,8 @@ return (
                     <input type="submit" value="Submit"></input>
                 </form> 
             </div>
-            <div id='container' style='height: 800px; min-width: 400px; max-width: 1000px; margin: 0 auto'></div>
+            <div id='container' style='height: 600px; width: 800px; min-width: 400px; max-width: 1000px; margin: 0 auto'>
+            </div>
         </body>
     </html>
 )

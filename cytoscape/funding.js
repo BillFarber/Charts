@@ -42,7 +42,7 @@ setToolTips = function() {
             text: function(){
                 var tip = this._private.data.tip;
                 var parsed = tip;
-                if(tip.indexOf("&lt;") == 0) {
+                if (tip.indexOf("&lt;") == 0) {
                     parsed = $('<div/>').html(tip).text();
                 }
                 return parsed;
@@ -66,6 +66,9 @@ var cy = cytoscape({
     style : [ {
         selector : 'node.tr',
         style : {
+            'height': 100,
+            'width': 100,
+            'font-size': '36',
             'background-color' : '#FF0000',
             'color' : '#FF0000',
             'label' : 'data(label)'
@@ -73,6 +76,9 @@ var cy = cytoscape({
     }, {
         selector : 'node.ured',
         style : {
+            'height': 100,
+            'width': 100,
+            'font-size': '36',
             'background-color' : '#009900',
             'color' : '#009900',
             'label' : 'data(label)'
@@ -80,6 +86,9 @@ var cy = cytoscape({
     }, {
         selector : 'node.r2',
         style : {
+            'height': 100,
+            'width': 100,
+            'font-size': '36',
             'background-color' : '#0000FF',
             'color' : '#0000FF',
             'label' : 'data(label)'
@@ -90,11 +99,12 @@ var cy = cytoscape({
             'width' : 1,
             'line-color' : '#6666FF',
             'color' : '#6666FF',
+            'font-size': '30',
             'mid-target-arrow-color' : '#6666FF',
             'mid-target-arrow-shape' : 'diamond',
             'mid-target-arrow-fill' : 'filled',
             'source-label' : 'data(predicate)',
-            'source-text-offset' : 100
+            'source-text-offset' : 200
         }
     }, {
         selector : 'edge.ct',
@@ -102,11 +112,12 @@ var cy = cytoscape({
             'width' : 1,
             'line-color' : '#FF6666',
             'color' : '#FF6666',
+            'font-size': '30',
             'mid-target-arrow-color' : '#FF6666',
             'mid-target-arrow-shape' : 'diamond',
             'mid-target-arrow-fill' : 'filled',
             'source-label' : 'data(predicate)',
-            'source-text-offset' : 100
+            'source-text-offset' : 200
         }
     } ],
 
@@ -122,16 +133,6 @@ var cy = cytoscape({
     }
 
 });
-
-
-//cy.$('.ured, .tr, .r2').on('tap', function(evt){
-//        insertNewElements(this);
-
-//        this.remove();
-
-//        var targetId = this.id();
-//        window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
-//});
 
 
 setToolTips();
