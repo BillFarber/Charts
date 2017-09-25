@@ -15,6 +15,9 @@ let $accession-number := (xdmp:get-request-field("accessionNumber"), $accession-
 let $_ := xdmp:log(("$accession-number",$accession-number))
 let $collection := charts-model:get-collection-from-accession-number($accession-number)
 let $_ := xdmp:log(("$collection",$collection))
+let $year := "2017"
+let $year := (xdmp:get-request-field("year"), $year)[1]
+let $_ := xdmp:log(("$year",$year))
 
 let $elements := 
         switch ($collection) 
@@ -47,6 +50,10 @@ return
           <p>Cytoscape qtip</p>
           <div id="queryInput">
             <form action="/cytoscape/funding.xqy">
+                <input type="radio" name="year" value="2017"> 2017</input>
+                <input type="radio" name="year" value="2016"> 2016</input>
+                <input type="radio" name="year" value="2015"> 2015</input>
+                <br></br>
                 Accession Number:<br></br>
                 <input type="text" name="accessionNumber" value="{$accession-number}"></input><br></br>
                 <input type="submit" value="Submit"></input>
