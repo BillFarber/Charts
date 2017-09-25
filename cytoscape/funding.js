@@ -35,15 +35,14 @@ setToolTips = function() {
 
         ]
       });
-    
-    
+
     cy.elements('node').qtip({
         zIndex: 1000,
         content: {
             text: function(){
                 var tip = this._private.data.tip;
                 var parsed = tip;
-                if (tip.startsWith("&lt;")) {
+                if(tip.indexOf("&lt;") == 0) {
                     parsed = $('<div/>').html(tip).text();
                 }
                 return parsed;
