@@ -47,7 +47,7 @@ return (
                     <input type="submit" value="Submit"></input>
                 </form> 
             </div>
-            <div id='container' style='height: 600px; min-width: 400px; max-width: 700px; margin: 0 auto'></div>
+            <div id='container' style='height: 800px; min-width: 400px; max-width: 1000px; margin: 0 auto'></div>
         </body>
     </html>
 )

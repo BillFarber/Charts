@@ -32,16 +32,16 @@ statePopup = function(selectedYear, stateCode) {
     var $div = $('<div></div>')
         .dialog({
             title: this.name,
-            width: 400,
-            height: 300
+            width: 600,
+            height: 400
         });
 
     window.chart = new Highcharts.Chart({
         chart: {
             renderTo: $div[0],
             type: 'pie',
-            width: 370,
-            height: 240
+            width: 600,
+            height: 400
         },
         title: {
             text: null

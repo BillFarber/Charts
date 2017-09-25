@@ -11,8 +11,10 @@ let $query-text := xdmp:get-request-field("queryText")
 let $_ := xdmp:log(("$state",$state))
 let $_ := xdmp:log(("$organization",$organization))
 let $_ := xdmp:log(("$query-text",$query-text))
+let $selected-year := "2017"
+let $selected-year := (xdmp:get-request-field("year"), $selected-year)[1]
 
-let $uris := ured-model:get-funding-for-state-and-organization($state, $organization, $query-text)
+let $uris := ured-model:get-funding-for-state-and-organization($state, $organization, $query-text, $selected-year)
 let $_ := xdmp:log(("$uris",$uris))
 
 let $table-title := fn:concat("URED Records for ", $organization, " in ", $state)
