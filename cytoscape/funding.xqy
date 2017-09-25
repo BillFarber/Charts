@@ -18,9 +18,9 @@ let $_ := xdmp:log(("$collection",$collection))
 
 let $elements := 
         switch ($collection) 
-            case "TR"   return tr-model:get-funding-elements($accession-number)
-            case "URED" return ured-model:get-funding-elements($accession-number)
-            case "R2"   return r2-model:get-funding-elements($accession-number)
+            case "TR"   return tr-model:get-funding-elements($accession-number, 1)
+            case "URED" return ured-model:get-funding-elements($accession-number, 1)
+            case "R2"   return r2-model:get-funding-elements($accession-number, 1)
             default     return charts-model:empty-elements-list()
 
 let $elements-script := fn:concat("var elements = ", $elements,";")
@@ -59,6 +59,7 @@ return
           <script src="/cytoscape/lib/jquery.qtip.min.js">&nbsp;</script>
           <link href="/cytoscape/lib/jquery.qtip.min.css" rel="stylesheet" type="text/css" />
           <script src="/cytoscape/lib/cytoscape-qtip.js">&nbsp;</script>
+          <script src="/cytoscape/lib/cytoscape-cxtmenu.js">&nbsp;</script>
           <script src="/cytoscape/funding.js">&nbsp;</script>
         </div>
     </body>

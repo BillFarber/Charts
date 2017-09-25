@@ -1,14 +1,41 @@
 setToolTips = function() {
+    cy.cxtmenu({
+        selector: 'node',
+        commands: [
+          {
+            content: '<span class="icon-arrow-right"></span><label>Expand</label>',
+            select: function(){
+              insertNewElements(this);
+            }
+          },
+
+          {
+            content: '<span class="icon-remove destructive-light"></span><label class="">Re-Center</label>',
+            select: function(){
+              var targetId = this.id();
+              window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
+            }
+          },
+
+          {
+            content: '<span class="icon-remove destructive-light"></span><label class="">Remove</label>',
+            select: function(){
+              cy.remove( this );
+            }
+          }
+
+        ]
+      });
+    
+    
     cy.elements('node').qtip({
         content: {
             text: function(){
                 var tip = this._private.data.tip;
-                console.log("tip:"+tip);
                 var parsed = tip;
                 if (tip.startsWith("&lt;")) {
                     parsed = $('<div/>').html(tip).text();
                 }
-                console.log("parsed:"+parsed);
                 return parsed;
             }
         },
@@ -88,14 +115,14 @@ var cy = cytoscape({
 });
 
 
-cy.$('.ured, .tr, .r2').on('tap', function(evt){
-        insertNewElements(this);
+//cy.$('.ured, .tr, .r2').on('tap', function(evt){
+//        insertNewElements(this);
 
 //        this.remove();
 
 //        var targetId = this.id();
 //        window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
-});
+//});
 
 
 setToolTips();
@@ -105,15 +132,15 @@ insertNewElements = function(parentNode) {
 }
 
 getNewElementsAjax = function(parentNode) {
-    console.log("ajax");
     var url = "/cytoscape/ajax/getMoreNodes.xqy?accessionNumber="+parentNode.id();
-    console.log("url: " + url);
     $.ajax({
         url: url,
         context: document.body
     }).done(function(data) {
-        console.log("done: " + JSON.stringify(data));
         cy.add(data);
         setToolTips();
+        cy.elements().layout({
+            name: 'concentric'
+        });
     });
 }

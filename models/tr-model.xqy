@@ -7,11 +7,11 @@ import module namespace ured-model     = "http://org.billFarber.marklogic/charts
 declare namespace mdr  = "http://dtic.mil/mdr/record";
 declare namespace meta = "http://dtic.mil/mdr/record/meta";
 
-declare function tr-model:get-funding-elements($accession-number) {
-    tr-model:get-funding-elements-from-tuples($accession-number)
+declare function tr-model:get-funding-elements($accession-number, $divider) {
+    tr-model:get-funding-elements-from-tuples($accession-number, $divider)
 };
 
-declare function tr-model:get-funding-elements-from-tuples($accession-number) {
+declare function tr-model:get-funding-elements-from-tuples($accession-number, $divider) {
     let $an-links := map:map()
     let $_ := map:put($an-links, "Center_Node", $accession-number)
 
@@ -32,7 +32,7 @@ declare function tr-model:get-funding-elements-from-tuples($accession-number) {
     let $_ := map:put($an-links, 'PE_Links', $pe-array)
     let $_ := map:put($an-links, 'CT_Links', $ct-array)
     let $_ := xdmp:log(("$an-links", $an-links))
-    let $elements := tr-model:create-elements-array($an-links)
+    let $elements := tr-model:create-elements-array($an-links, $divider)
     return xdmp:to-json-string($elements)
 };
 
@@ -66,12 +66,12 @@ declare function tr-model:get-ct-list($accession-number) {
     )
 };
 
-declare function tr-model:create-elements-array($an-links) {
+declare function tr-model:create-elements-array($an-links, $divider) {
     let $elements := json:to-array()
 
     let $center-accession-number := map:get($an-links, "Center_Node")
     let $tip-content := tr-model:get-tip-content($center-accession-number)
-    let $center-element := tr-model:create-node-element($center-accession-number, 8, $center-accession-number, "tr", $tip-content)
+    let $center-element := tr-model:create-node-element($center-accession-number, 8 div $divider, $center-accession-number, "tr", $tip-content)
     let $_ := json:array-push($elements, $center-element)
 
     let $pe-obj-list := map:get($an-links, "PE_Links")
@@ -83,7 +83,7 @@ declare function tr-model:create-elements-array($an-links) {
             let $link-list := map:get($ct-obj, "Links")
             for $link-accession-number in json:array-values($link-list)
                 let $tip-content := ured-model:get-tip-content($link-accession-number)
-                let $node-element := tr-model:create-node-element($link-accession-number, 4, $link-accession-number, "ured", $tip-content)
+                let $node-element := tr-model:create-node-element($link-accession-number, 4 div $divider, $link-accession-number, "ured", $tip-content)
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
                 let $edge-element := tr-model:create-edge-element($id, $center-accession-number, $ct, $link-accession-number, "ct")

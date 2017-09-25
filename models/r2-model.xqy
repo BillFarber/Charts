@@ -8,11 +8,11 @@ declare namespace mdr  = "http://dtic.mil/mdr/record";
 declare namespace meta = "http://dtic.mil/mdr/record/meta";
 declare namespace r2   = "http://www.dtic.mil/comptroller/xml/schema/022009/r2";
 
-declare function r2-model:get-funding-elements($accession-number) {
-    r2-model:get-funding-elements-from-tuples($accession-number)
+declare function r2-model:get-funding-elements($accession-number, $divider) {
+    r2-model:get-funding-elements-from-tuples($accession-number, $divider)
 };
 
-declare function r2-model:get-funding-elements-from-tuples($accession-number) {
+declare function r2-model:get-funding-elements-from-tuples($accession-number, $divider) {
     let $an-links := map:map()
     let $_ := map:put($an-links, "Center_Node", $accession-number)
 
@@ -33,7 +33,7 @@ declare function r2-model:get-funding-elements-from-tuples($accession-number) {
     let $_ := map:put($an-links, 'PE_Links', $pe-array)
     let $_ := map:put($an-links, 'CT_Links', $ct-array)
     let $_ := xdmp:log(("$an-links", $an-links))
-    let $elements := r2-model:create-elements-array($an-links)
+    let $elements := r2-model:create-elements-array($an-links, $divider)
     return xdmp:to-json-string($elements)
 };
 
@@ -67,12 +67,12 @@ declare function r2-model:get-pe-list($accession-number) {
     )
 };
 
-declare function r2-model:create-elements-array($an-links) {
+declare function r2-model:create-elements-array($an-links, $divider) {
     let $elements := json:to-array()
 
     let $center-accession-number := map:get($an-links, "Center_Node")
     let $tip-content := r2-model:get-tip-content($center-accession-number)
-    let $center-element := r2-model:create-node-element($center-accession-number, 8, $center-accession-number, "r2", $tip-content)
+    let $center-element := r2-model:create-node-element($center-accession-number, 8 div $divider, $center-accession-number, "r2", $tip-content)
     let $_ := json:array-push($elements, $center-element)
 
     let $pe-obj-list := map:get($an-links, "PE_Links")
@@ -82,7 +82,7 @@ declare function r2-model:create-elements-array($an-links) {
             let $link-list := map:get($pe-obj, "Links")
             for $link-accession-number in json:array-values($link-list)
                 let $tip-content := ured-model:get-tip-content($link-accession-number)
-                let $node-element := r2-model:create-node-element($link-accession-number, 4, $link-accession-number, "ured", $tip-content)
+                let $node-element := r2-model:create-node-element($link-accession-number, 4 div $divider, $link-accession-number, "ured", $tip-content)
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
                 let $edge-element := r2-model:create-edge-element($id, $center-accession-number, $pe, $link-accession-number, "pe")

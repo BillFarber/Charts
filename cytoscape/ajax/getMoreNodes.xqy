@@ -9,15 +9,13 @@ declare namespace mdr="http://dtic.mil/mdr/record";
 declare namespace meta="http://dtic.mil/mdr/record/meta";
 
 let $accession-number := xdmp:get-request-field("accessionNumber")
-let $_ := xdmp:log(("$accession-number",$accession-number))
 let $collection := charts-model:get-collection-from-accession-number($accession-number)
-let $_ := xdmp:log(("$collection",$collection))
 
 let $elements := 
         switch ($collection) 
-            case "TR"   return tr-model:get-funding-elements($accession-number)
-            case "URED" return ured-model:get-funding-elements($accession-number)
-            case "R2"   return r2-model:get-funding-elements($accession-number)
+            case "TR"   return tr-model:get-funding-elements($accession-number, 2)
+            case "URED" return ured-model:get-funding-elements($accession-number, 2)
+            case "R2"   return r2-model:get-funding-elements($accession-number, 2)
             default     return charts-model:empty-elements-list()
 let $_ := xdmp:log(("$elements",$elements))
 
