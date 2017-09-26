@@ -6,7 +6,7 @@ declare namespace mdr="http://dtic.mil/mdr/record";
 declare namespace meta="http://dtic.mil/mdr/record/meta";
 
 let $query-text := xdmp:get-request-field("queryText")
-let $selected-year := "2017"
+let $selected-year := "2011"
 let $selected-year := (xdmp:get-request-field("year"), $selected-year)[1]
 let $year-options := (2010 to 2017)
 

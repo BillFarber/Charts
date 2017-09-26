@@ -43,16 +43,14 @@ return
       <meta charset="UTF-8"/>
     </head>
     <body>
-        <div>
-          <p>Cytoscape qtip</p>
-          <div id="queryInput">
+          <div id="queryInput" style="float:left;">
             <form action="/cytoscape/funding.xqy">
                 Accession Number:<br></br>
                 <input type="text" name="accessionNumber" value="{$accession-number}"></input><br></br>
                 <input type="submit" value="Submit"></input>
             </form> 
           </div>
-          <div id="cytoscape-container"></div>
+          <div id="cytoscape-container" style='height: 700px; width: 1000px; min-width: 400px; max-width: 1000px; margin: 0 auto'></div>
           <script type="text/javascript">{$elements-script}</script>
           <script src="/cytoscape/lib/jquery-3.1.1.min.js">&nbsp;</script>
           <script src="/cytoscape/lib/cytoscape.js">&nbsp;</script>
@@ -61,7 +59,6 @@ return
           <script src="/cytoscape/lib/cytoscape-qtip.js">&nbsp;</script>
           <script src="/cytoscape/lib/cytoscape-cxtmenu.js">&nbsp;</script>
           <script src="/cytoscape/funding.js">&nbsp;</script>
-        </div>
     </body>
   </html>
 )
