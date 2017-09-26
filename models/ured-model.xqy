@@ -209,7 +209,7 @@ declare function ured-model:get-state-and-organization-funding-from-tuples($stat
             cts:and-query((
                 cts:collection-query("/citation/URED"),
                 cts:field-value-query("pst", $state-code),
-                cts:field-value-query("poa", $performingOrganization),
+                cts:field-value-query("poa", fn:concat($performingOrganization,"*")),
                 cts:field-range-query("crd", ">", $selected-year),
                 cts:field-range-query("crd", "<", $next-year),
                 $word-query
