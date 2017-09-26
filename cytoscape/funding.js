@@ -122,7 +122,7 @@ var cy = cytoscape({
     } ],
 
     layout : {
-        name : 'concentric',
+        name : layoutName,
         minNodeSpacing: 50,
         levelWidth : function() {
             return 3;
