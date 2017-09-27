@@ -3,14 +3,10 @@ return (
     text{ '<!DOCTYPE html>' },
     <html>
         <body>
-            <h1>Hard-coded Samples</h1>
+            <h1>MDR Sample Visualizations</h1>
             <ul>
-                <li><a href="plainD3/states-funding.xqy">Plain D3 Choropleth</a></li>
-                <li><a href="highcharts/highchartsSampleChoropleth.xqy">Highcharts Choropleth</a></li>
-                <li><a href="googleCharts/states-funding.xqy">Google Charts States Choropleth</a></li>
-                <li><a href="googleCharts/country-funding.xqy">Google Charts Country Choropleth</a></li>
-                <br>&nbsp;</br>
-                <li><a href="cytoscape/funding.xqy">Funding Link Graph</a></li>
+                <li><a href="highcharts/highchartsSampleChoropleth.xqy">URED Funding by State</a></li>
+                <li><a href="cytoscape/funding.xqy">R2-URED-TR link graph</a></li>
             </ul>
         </body>
     </html>
