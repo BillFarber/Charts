@@ -16,6 +16,10 @@ let $_ := xdmp:log(("$accession-number",$accession-number))
 let $collection := charts-model:get-collection-from-accession-number($accession-number)
 let $_ := xdmp:log(("$collection",$collection))
 
+let $selected-layout := "concentric"
+let $selected-layout := (xdmp:get-request-field("layout"), $selected-layout)[1]
+let $layouts := ("cose", "concentric", "circle")
+
 let $elements := 
         switch ($collection) 
             case "TR"   return tr-model:get-funding-elements($accession-number, 1)
@@ -23,7 +27,7 @@ let $elements :=
             case "R2"   return r2-model:get-funding-elements($accession-number, 1)
             default     return charts-model:empty-elements-list()
 
-let $elements-script := fn:concat("var elements = ", $elements,";")
+let $elements-script := fn:concat("var elements = ", $elements,"; var layoutName = '", $selected-layout, "';")
 let $_ := xdmp:log(("$elements-script",$elements-script))
 
 return
@@ -43,16 +47,23 @@ return
       <meta charset="UTF-8"/>
     </head>
     <body>
-        <div>
-          <p>Cytoscape qtip</p>
-          <div id="queryInput">
+          <div id="queryInput" style="float:left;">
             <form action="/cytoscape/funding.xqy">
+                    {
+                        for $layout in $layouts
+                        return
+                            if ($layout eq $selected-layout) then
+                                <div><input type="radio" name="layout" value="{$layout}" checked="checked" > {$layout}</input></div>
+                            else
+                                <div><input type="radio" name="layout" value="{$layout}" > {$layout}</input></div>
+                    }
+                    <br></br>
                 Accession Number:<br></br>
                 <input type="text" name="accessionNumber" value="{$accession-number}"></input><br></br>
                 <input type="submit" value="Submit"></input>
             </form> 
           </div>
-          <div id="cytoscape-container"></div>
+          <div id="cytoscape-container" style='height: 700px; width: 1000px; min-width: 400px; max-width: 1000px; margin: 0 auto'></div>
           <script type="text/javascript">{$elements-script}</script>
           <script src="/cytoscape/lib/jquery-3.1.1.min.js">&nbsp;</script>
           <script src="/cytoscape/lib/cytoscape.js">&nbsp;</script>
@@ -61,7 +72,6 @@ return
           <script src="/cytoscape/lib/cytoscape-qtip.js">&nbsp;</script>
           <script src="/cytoscape/lib/cytoscape-cxtmenu.js">&nbsp;</script>
           <script src="/cytoscape/funding.js">&nbsp;</script>
-        </div>
     </body>
   </html>
 )

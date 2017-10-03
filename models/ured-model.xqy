@@ -192,11 +192,12 @@ declare function ured-model:get-tip-content($ured-accession-number) {
 
 
 
-declare function ured-model:get-funding-for-state-and-organization($state-code, $performingOrganization, $query-text) {
-    ured-model:get-state-and-organization-funding-from-tuples($state-code, $performingOrganization, $query-text)
+declare function ured-model:get-funding-for-state-and-organization($state-code, $performingOrganization, $query-text, $selected-year) {
+    ured-model:get-state-and-organization-funding-from-tuples($state-code, $performingOrganization, $query-text, $selected-year)
 };
 
-declare function ured-model:get-state-and-organization-funding-from-tuples($state-code, $performingOrganization, $query-text) {
+declare function ured-model:get-state-and-organization-funding-from-tuples($state-code, $performingOrganization, $query-text, $selected-year) {
+    let $next-year := xs:string(xs:integer($selected-year) + 1)
     let $word-query :=
         if ($query-text) then
             cts:word-query($query-text)
@@ -208,7 +209,9 @@ declare function ured-model:get-state-and-organization-funding-from-tuples($stat
             cts:and-query((
                 cts:collection-query("/citation/URED"),
                 cts:field-value-query("pst", $state-code),
-                cts:field-value-query("poa", $performingOrganization),
+                cts:field-value-query("poa", fn:concat($performingOrganization,"*")),
+                cts:field-range-query("crd", ">", $selected-year),
+                cts:field-range-query("crd", "<", $next-year),
                 $word-query
             ))
         )
@@ -220,12 +223,12 @@ declare function ured-model:get-state-and-organization-funding-from-tuples($stat
 
 
 
-declare function ured-model:get-funding($query-text) {
-    ured-model:get-complex-funding-from-tuples($query-text)
+declare function ured-model:get-funding($query-text, $selected-year) {
+    ured-model:get-complex-funding-from-tuples($query-text, $selected-year)
 };
 
-declare function ured-model:get-complex-funding-from-tuples($query-text) {
-    let $tuples := ured-model:get-matching-tuples($query-text)
+declare function ured-model:get-complex-funding-from-tuples($query-text, $selected-year) {
+    let $tuples := ured-model:get-matching-tuples($query-text, $selected-year)
 
     let $state-funding-by-organization := map:map()
     let $_ :=
@@ -281,11 +284,12 @@ declare function ured-model:group-state-funding-by-organization($state-funding-b
             return map:put($state-funding-by-organization, $state-code, $stateMap)
 };
 
-declare function ured-model:get-matching-tuples($query-text) {
+declare function ured-model:get-matching-tuples($query-text, $selected-year) {
     let $word-query :=
         if ($query-text) then
             cts:word-query($query-text)
         else ()
+    let $next-year := xs:string(xs:integer($selected-year) + 1)
     return
         cts:value-tuples(
             (
@@ -297,6 +301,8 @@ declare function ured-model:get-matching-tuples($query-text) {
             (),
             cts:and-query((
                 cts:collection-query("/citation/URED"),
+                cts:field-range-query("crd", ">", $selected-year),
+                cts:field-range-query("crd", "<", $next-year),
                 $word-query
             ))
         )

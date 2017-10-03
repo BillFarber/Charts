@@ -64,7 +64,7 @@ $(function() {
             point : {
                 events : {
                     click : function(e) {
-                        statePopup(this.code);
+                        statePopup(selectedYear, this.code, this.name);
                     }
                 }
             }
