@@ -136,6 +136,7 @@
                     "invalid-values": "ignore"
                 },
                 {
+                    "scalar-type": "string",
                     "field-name": "ctPunctuated",
                     "collation": "http://marklogic.com/collation/",
                     "range-value-positions": false,
