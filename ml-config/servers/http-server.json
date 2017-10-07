@@ -2,8 +2,8 @@
    "group-name":"Default",
    "server-type":"http",
    "server-name":"Charts",
-   "root":"/Users/pbarber/Documents/workspaces/MBO/Charts-github",
-   "port":8010,
+   "root":"/charts",
+   "port":8080,
    "content-database":"Charts",
    "authentication":"application-level",
    "default-user":"admin"
