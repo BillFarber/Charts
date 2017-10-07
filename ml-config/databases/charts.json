@@ -42,6 +42,15 @@
     ],
     "field": [
                 {
+                    "field-name": "crd",
+                    "field-path": [
+                        {
+                            "path": "//meta:CitationCreationDate/meta:Date",
+                            "weight": 1.0
+                        }
+                    ]
+                },
+                {
                     "field-name": "ctPunctuated",
                     "field-path": [
                         {
@@ -121,6 +130,12 @@
     "range-field-index": [
                 {
                     "scalar-type": "string",
+                    "field-name": "crd",
+                    "collation": "http://marklogic.com/collation/",
+                    "range-value-positions": false,
+                    "invalid-values": "ignore"
+                },
+                {
                     "field-name": "ctPunctuated",
                     "collation": "http://marklogic.com/collation/",
                     "range-value-positions": false,

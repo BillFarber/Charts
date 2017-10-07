@@ -1,0 +1,11 @@
+# To get this example up and running quickly on DEV:
+
+# In the Charts project
+gradle -i -PenvironmentName=dev mlDeploy
+gradle -i -PenvironmentName=dev mlLoadModules
+gradle -i -PenvironmentName=dev mlReloadModules
+
+# In the ChartSampleData project
+gradle -PmainClass=org.billFarber.charts.dataGenerator.GenerateUred executeSpecified
+gradle -PmainClass=org.billFarber.charts.dataGenerator.GenerateTr executeSpecified
+gradle -PmainClass=org.billFarber.charts.dataGenerator.GenerateR2 executeSpecified

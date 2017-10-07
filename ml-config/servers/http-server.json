@@ -5,6 +5,7 @@
    "root":"/charts",
    "port":8080,
    "content-database":"Charts",
+   "modules-database":"Charts-Modules",
    "authentication":"application-level",
    "default-user":"admin"
 }
