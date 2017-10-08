@@ -3,7 +3,7 @@
    "server-type":"http",
    "server-name":"Charts",
    "root":"/charts",
-   "port":8080,
+   "port": %%CHARTS_PORT%%,
    "content-database":"Charts",
    "modules-database":"Charts-Modules",
    "authentication":"application-level",
