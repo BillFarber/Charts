@@ -8,6 +8,30 @@ declare namespace mdr  = "http://dtic.mil/mdr/record";
 declare namespace meta = "http://dtic.mil/mdr/record/meta";
 declare namespace r2   = "http://www.dtic.mil/comptroller/xml/schema/022009/r2";
 
+declare function r2-model:get-funding-over-time($program-element) {
+    let $uris := cts:uris(
+        (),
+        (),
+        cts:and-query((
+            cts:collection-query("/citation/R2"),
+            cts:element-value-query(xs:QName("r2:ProgramElementNumber"), $program-element)
+        ))
+    )
+    let $pe-funding := json:to-array()
+    let $_ :=
+        for $uri in $uris
+        let $doc := fn:doc($uri)
+        let $accession-number := fn:doc($uri)/mdr:Record/meta:Metadata/meta:AccessionNumber/text()
+        let $budget-year := fn:doc($uri)/mdr:Record/r2:ProgramElementList/r2:ProgramElement/r2:BudgetYear/text()
+        let $funding := fn:doc($uri)/mdr:Record/meta:Metadata/meta:FundingAmount/text()
+        let $this-doc := map:map()
+        let $_ := map:put($this-doc, "AN", $accession-number)
+        let $_ := map:put($this-doc, "BudgetYear", $budget-year)
+        let $_ := map:put($this-doc, "Funding", $funding)
+        return json:array-push($pe-funding, $this-doc)
+    return xdmp:to-json-string($pe-funding)
+};
+
 declare function r2-model:get-funding-elements($accession-number, $divider) {
     r2-model:get-funding-elements-from-tuples($accession-number, $divider)
 };

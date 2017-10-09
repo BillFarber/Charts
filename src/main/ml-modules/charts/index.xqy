@@ -7,6 +7,7 @@ return (
             <ul>
                 <li><a href="highcharts/highchartsSampleChoropleth.xqy">URED Funding by State</a></li>
                 <li><a href="cytoscape/funding.xqy">R2-URED-TR link graph</a></li>
+                <li><a href="highcharts/programElementFunding.xqy">Program Element Funding</a></li>
             </ul>
         </body>
     </html>
