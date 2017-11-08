@@ -1,6 +1,6 @@
 # To get this example up and running quickly on DEV:
 
-# In the Charts project
+# In the Charts project directory
 gradle -i -PenvironmentName=dev mlDeploy
 gradle -i -PenvironmentName=dev mlLoadModules
 gradle -i -PenvironmentName=dev mlReloadModules
