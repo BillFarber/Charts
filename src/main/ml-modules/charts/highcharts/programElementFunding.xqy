@@ -8,7 +8,8 @@ declare namespace meta="http://dtic.mil/mdr/record/meta";
 let $program-element := "PE00000"
 let $program-element := (xdmp:get-request-field("programElement"), $program-element)[1]
 let $funding := r2-model:get-funding-over-time($program-element)
-let $_ := xdmp:log(("$funding",$funding))
+let $data-script := fn:concat("var titleText = '", $funding[1], "'; var firstYear = ", $funding[2], "; var seriesData = ", $funding[3], ";")
+let $_ := xdmp:log(("$data-script", $data-script))
 
 let $_ := xdmp:set-response-content-type('text/html')
 return (
@@ -22,6 +23,7 @@ return (
             <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" type="text/css" />
 
             <script src="/highcharts/highcharts.js">&nbsp;</script>
+            <script type="text/javascript">{$data-script}</script>
         </head>
         <body>
             <div id="queryInput" style="float:left;">

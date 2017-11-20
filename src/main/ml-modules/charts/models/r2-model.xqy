@@ -14,22 +14,43 @@ declare function r2-model:get-funding-over-time($program-element) {
         (),
         cts:and-query((
             cts:collection-query("/citation/R2"),
-            cts:element-value-query(xs:QName("r2:ProgramElementNumber"), $program-element)
+            cts:element-value-query(xs:QName("r2:ProgramElementNumber"), $program-element),
+            cts:element-query(xs:QName("r2:ProgramElementFunding"), cts:and-query(()))
         ))
     )
     let $pe-funding := json:to-array()
     let $_ :=
-        for $uri in $uris
+        for $uri in $uris[1]
         let $doc := fn:doc($uri)
         let $accession-number := fn:doc($uri)/mdr:Record/meta:Metadata/meta:AccessionNumber/text()
-        let $budget-year := fn:doc($uri)/mdr:Record/r2:ProgramElementList/r2:ProgramElement/r2:BudgetYear/text()
-        let $funding := fn:doc($uri)/mdr:Record/meta:Metadata/meta:FundingAmount/text()
+        let $budget-year := fn:doc($uri)/mdr:Record/r2:R2ExhibitList/r2:R2Exhibit/r2:ProgramElement/r2:BudgetYear/text()
+    let $_ := xdmp:log(("$budget-year", $budget-year))
+        let $current-year-funding := fn:doc($uri)/mdr:Record/r2:R2ExhibitList/r2:R2Exhibit/r2:ProgramElement/r2:ProgramElementFunding/r2:CurrentYear/text()
+        let $year-one-funding := fn:doc($uri)/mdr:Record/r2:R2ExhibitList/r2:R2Exhibit/r2:ProgramElement/r2:ProgramElementFunding/r2:BudgetYearOne/text()
+        let $year-two-funding := fn:doc($uri)/mdr:Record/r2:R2ExhibitList/r2:R2Exhibit/r2:ProgramElement/r2:ProgramElementFunding/r2:BudgetYearTwo/text()
+        let $year-three-funding := fn:doc($uri)/mdr:Record/r2:R2ExhibitList/r2:R2Exhibit/r2:ProgramElement/r2:ProgramElementFunding/r2:BudgetYearThree/text()
+        let $year-four-funding := fn:doc($uri)/mdr:Record/r2:R2ExhibitList/r2:R2Exhibit/r2:ProgramElement/r2:ProgramElementFunding/r2:BudgetYearFour/text()
+        let $year-five-funding := fn:doc($uri)/mdr:Record/r2:R2ExhibitList/r2:R2Exhibit/r2:ProgramElement/r2:ProgramElementFunding/r2:BudgetYearFive/text()
         let $this-doc := map:map()
         let $_ := map:put($this-doc, "AN", $accession-number)
         let $_ := map:put($this-doc, "BudgetYear", $budget-year)
         let $_ := map:put($this-doc, "Funding", $funding)
         return json:array-push($pe-funding, $this-doc)
-    return xdmp:to-json-string($pe-funding)
+    let $json-string := xdmp:to-json-string($pe-funding)
+    let $_ := xdmp:log(("$json-string", $json-string))
+    return (
+        fn:concat($program-element, " funding")
+        2009,
+        "[
+            {
+                name: 'Installation',
+                data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+            }, {
+                name: 'Manufacturing',
+                data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+            }
+        ]"
+    )
 };
 
 declare function r2-model:get-funding-elements($accession-number, $divider) {
