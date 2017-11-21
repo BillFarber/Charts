@@ -11,7 +11,7 @@ $(function() {
 
         yAxis: {
             title: {
-                text: 'Funding in Dollars'
+                text: 'Funding in Dollars (thousands)'
             }
         },
 
@@ -35,12 +35,12 @@ $(function() {
         responsive: {
             rules: [{
                 condition: {
-                    maxWidth: 500
+                    maxWidth: 800
                 },
                 chartOptions: {
                     legend: {
                         layout: 'horizontal',
-                        align: 'center',
+                        align: 'left',
                         verticalAlign: 'bottom'
                     }
                 }

@@ -5,7 +5,7 @@ import module namespace r2-model = "http://org.billFarber.marklogic/charts/r2" a
 declare namespace mdr="http://dtic.mil/mdr/record";
 declare namespace meta="http://dtic.mil/mdr/record/meta";
 
-let $program-element := "PE00000"
+let $program-element := "0602702E"
 let $program-element := (xdmp:get-request-field("programElement"), $program-element)[1]
 let $funding := r2-model:get-funding-over-time($program-element)
 let $data-script := fn:concat("var titleText = '", $funding[1], "'; var firstYear = ", $funding[2], "; var seriesData = ", $funding[3], ";")
@@ -26,13 +26,13 @@ return (
             <script type="text/javascript">{$data-script}</script>
         </head>
         <body>
-            <div id="queryInput" style="float:left;">
+            <div id="queryInput" style="float:left; height: 600px; width: 200px;">
                  <form action="/highcharts/programElementFunding.xqy">
                     <input type="text" name="programElement" value="{$program-element}"></input><br></br>
                     <input type="submit" value="Submit"></input>
                 </form> 
             </div>
-            <div id='container' style='height: 600px; width: 800px; min-width: 400px; max-width: 1000px; margin: 0 auto'>
+            <div id='container' style='height: 600px; width: 1200px; margin: 0 auto;'>
             </div>
             <script src='/highcharts/programElementFunding.js'>&nbsp;</script>
         </body>
