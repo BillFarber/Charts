@@ -1,6 +1,6 @@
 setToolTips = function() {
     cy.cxtmenu({
-        selector: 'node',
+        selector: 'node.ured,node.tr',
         zIndex: 20000,
         menuRadius: 75,
         activePadding: 10,
@@ -20,6 +20,52 @@ setToolTips = function() {
               var targetId = this.id();
               window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
             }
+          },
+
+          {
+            content: '<span class="icon-remove destructive-light"></span><label class="">Remove</label>',
+            select: function(){
+              cy.remove( this );
+            }
+          },
+
+          {
+            content: '<span class="icon-remove destructive-light"></span><label class="">Cancel</label>'
+          }
+
+        ]
+      });
+
+    cy.cxtmenu({
+        selector: 'node.r2',
+        zIndex: 20000,
+        menuRadius: 75,
+        activePadding: 10,
+        fillColor: 'rgba(0, 0, 0, 0.9)',
+        openMenuEvents: 'cxttapstart taphold',
+        commands: [
+          {
+            content: '<span class="icon-arrow-right"></span><label>Expand</label>',
+            select: function(){
+              insertNewElements(this);
+            }
+          },
+
+          {
+            content: '<span class="icon-remove destructive-light"></span><label class="">Re-Center</label>',
+            select: function(){
+              var targetId = this.id();
+              window.location.href = "/cytoscape/funding.xqy?accessionNumber="+targetId;
+            }
+          },
+
+          {
+            content: '<span class="icon-remove destructive-light"></span><label class="">Funding</label>',
+            select: function(){
+              var targetPE = this._private.data.pe;
+              window.location.href = "/highcharts/programElementFunding.xqy?programElement=" + targetPE;
+            },
+            disabled: false
           },
 
           {

@@ -165,6 +165,7 @@ declare function r2-model:create-node-element($id, $ring, $label, $classes, $tip
     let $_ := map:put($element-data, "ring", $ring)
     let $_ := map:put($element-data, "label", $label)
     let $_ := map:put($element-data, "tip", $tip-content)
+    let $_ := map:put($element-data, "pe", fn:tokenize($id, "_")[1])
     let $element := map:map()
     let $_ := map:put($element, "data", $element-data)
     let $_ := map:put($element, "classes", $classes)

@@ -113,7 +113,7 @@ declare function ured-model:create-elements-array($an-links, $divider) {
 
     let $center-accession-number := map:get($an-links, "Center_Node")
     let $tip-content := ured-model:get-tip-content($center-accession-number)
-    let $center-element := ured-model:create-node-element($center-accession-number, 8 div $divider, $center-accession-number, "ured", $tip-content)
+    let $center-element := ured-model:create-node-element($center-accession-number, 8 div $divider, $center-accession-number, "ured", $tip-content, ())
     let $_ := json:array-push($elements, $center-element)
 
     let $pe-obj-list := map:get($an-links, "PE_Links")
@@ -123,7 +123,7 @@ declare function ured-model:create-elements-array($an-links, $divider) {
             let $link-list := map:get($pe-obj, "Links")
             for $link-accession-number in json:array-values($link-list)
                 let $tip-content := r2-model:get-tip-content($link-accession-number)
-                let $node-element := ured-model:create-node-element($link-accession-number, 4 div $divider, $link-accession-number, "r2", $tip-content)
+                let $node-element := ured-model:create-node-element($link-accession-number, 4 div $divider, $link-accession-number, "r2", $tip-content, fn:tokenize($link-accession-number, "_")[1])
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
                 let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $pe, $link-accession-number, "pe")
@@ -136,7 +136,7 @@ declare function ured-model:create-elements-array($an-links, $divider) {
             let $link-list := map:get($ct-obj, "Links")
             for $link-accession-number in json:array-values($link-list)
                 let $tip-content := tr-model:get-tip-content($link-accession-number)
-                let $node-element := ured-model:create-node-element($link-accession-number, 4 div $divider, $link-accession-number, "tr", $tip-content)
+                let $node-element := ured-model:create-node-element($link-accession-number, 4 div $divider, $link-accession-number, "tr", $tip-content, ())
                 let $_ := json:array-push($elements, $node-element)
                 let $id := fn:concat($center-accession-number,"to",$link-accession-number)
                 let $edge-element := ured-model:create-edge-element($id, $center-accession-number, $ct, $link-accession-number, "ct")
@@ -145,12 +145,13 @@ declare function ured-model:create-elements-array($an-links, $divider) {
     return $elements
 };
 
-declare function ured-model:create-node-element($id, $ring, $label, $classes, $tip-content as xs:string?) {
+declare function ured-model:create-node-element($id, $ring, $label, $classes, $tip-content as xs:string?, $pe) {
     let $element-data := map:map()
     let $_ := map:put($element-data, "id", $id)
     let $_ := map:put($element-data, "ring", $ring)
     let $_ := map:put($element-data, "label", $label)
     let $_ := map:put($element-data, "tip", $tip-content)
+    let $_ := map:put($element-data, "pe", fn:tokenize($id, "_")[1])
     let $element := map:map()
     let $_ := map:put($element, "data", $element-data)
     let $_ := map:put($element, "classes", $classes)
