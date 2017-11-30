@@ -1,0 +1,11 @@
+# Pass in a trust store with certs for a repo.
+-Djavax.net.ssl.trustStore=<pathToCerts>\cacerts
+
+# Pass in the password for the trust store
+-Djavax.net.ssl.trustStorePassword=changeit
+
+# Specify a repository
+-Dmaven.repo.local=<pathToRepo>\.m2
+
+# Example
+mvn -Djavax.net.ssl.trustStore=C:\Users\PBarber\cacerts  -Djavax.net.ssl.trustStorePassword=changeit  -Dmaven.repo.local=C:\Users\PBarber\.m2 test
