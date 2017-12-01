@@ -9,3 +9,12 @@
 
 # Example
 mvn -Djavax.net.ssl.trustStore=C:\Users\PBarber\cacerts  -Djavax.net.ssl.trustStorePassword=changeit  -Dmaven.repo.local=C:\Users\PBarber\.m2 test
+
+# Show information about a lifecycle, phase, or goal (aka mojo)
+mvn help:describe -Dcmd=clean
+mvn help:describe -Dcmd=package
+mvn help:describe -Dcmd=clean:clean
+
+Custom Lifecycle:
+https://nextmetaphor.io/2016/10/10/custom-maven-lifecycle/
+https://maven.apache.org/examples/maven-3-lifecycle-extensions.html
